@@ -5,7 +5,7 @@ export interface Iproduct {
 	description: string
 	category: string
 	image: string
-	raiting: {
+	rating: {
 		rate: number
 		count: number
 	}
