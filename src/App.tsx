@@ -1,12 +1,10 @@
 import React, {createElement as e} from 'react'
-import {Product} from './components/Product'
-import {products} from './data/products'
+import {Login} from './components/Login'
 
 function App(){
   return (
-      <div className="container mx-auto max-w-2xl pt-5">
-      <Product product={products[0]}/>
-      {/* <Product product={products[1]}/> */}
+    <div className="app">
+      <Login />
     </div>
   )
 }
