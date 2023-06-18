@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 form{
-    height: 520px;
+    height: 570px;
     width: 400px;
     background-color: #7db4a7;
     position: absolute;
@@ -53,8 +53,14 @@ input{
 ::placeholder{
     color: #e5e5e5;
 }
+
+form a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
 button{
-    margin-top: 50px;
+    margin-top: 30px;
     width: 100%;
     background-color: #ffffff;
     color: #080710;
