@@ -1,4 +1,10 @@
-export default [
+export type ICountry = {
+	flag: string,
+	country: string,
+	code: string
+}
+
+export const Countries:ICountry[] = [
 	{
 		"flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1e8.svg",
 		"country": "Ascension Island",
@@ -151,7 +157,8 @@ export default [
 	},
 	{
 		"flag": "https://twemoji.maxcdn.com/2/svg/1f1e7-1f1f6.svg",
-		"country": "Caribbean Netherlands"
+		"country": "Caribbean Netherlands",
+		"code": "bq"
 	},
 	{
 		"flag": "https://twemoji.maxcdn.com/2/svg/1f1e7-1f1f7.svg",
@@ -565,7 +572,8 @@ export default [
 	},
 	{
 		"flag": "https://twemoji.maxcdn.com/2/svg/1f1ee-1f1f7.svg",
-		"country": "Iran"
+		"country": "Iran",
+		"code": "ir"
 	},
 	{
 		"flag": "https://twemoji.maxcdn.com/2/svg/1f1ee-1f1f8.svg",

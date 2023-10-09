@@ -1,0 +1,10 @@
+.play-content h2{
+    font-size: 26px;
+    margin: 30px 0px;
+}
+
+.play-content h2, .score{
+    text-align: center;
+    color: rgb(255,255,250);
+    font-family: DelaGothicOne;
+}

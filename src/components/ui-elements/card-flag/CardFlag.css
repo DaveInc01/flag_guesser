@@ -1,0 +1,15 @@
+.card-success {
+    border: 2px solid green;
+}
+
+.card-danger {
+    border: 2px solid red;
+}
+
+.main-card {
+    margin: auto;
+}
+
+.main-card span img{
+    width: 200px!important;
+}

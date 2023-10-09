@@ -4,7 +4,7 @@ type IInfoDeskButton = {
     icon: string, 
     text: string,
     className?: string,
-    action: {actionIcon: string, clickCallback: (ev: MouseEvent<HTMLElement>)=>void}
+    action?: {actionIcon: string, clickCallback: (ev: MouseEvent<HTMLElement>)=>void}
 }
 
 const InfoDeskStyle:CSSProperties ={
@@ -29,7 +29,7 @@ const textStyle:CSSProperties = {
 
 const InfoDeskButtonStyle:CSSProperties = {
     width: "40px", 
-    padding: "2px",
+    padding: "4px",
     cursor: "pointer"
 }
 
@@ -37,8 +37,9 @@ export const InfoDeskButton = ({
         icon, 
         text, 
         className,
-        action:{actionIcon, clickCallback}
+        action,
     }:IInfoDeskButton) => {
+        
    return (
     <div style={InfoDeskStyle} className={className}>
         <span>
@@ -47,9 +48,9 @@ export const InfoDeskButton = ({
         <span style={textStyle}>
             {text}
         </span>
-        <span>
-            <img style={InfoDeskButtonStyle} src={actionIcon} onClick={clickCallback}/>
-        </span>
+        {action?.actionIcon && <span>
+            <img style={InfoDeskButtonStyle} src={action.actionIcon} onClick={action.clickCallback}/>
+        </span>}
     </div>
    )
 }

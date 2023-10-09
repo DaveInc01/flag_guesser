@@ -1,0 +1,33 @@
+  
+  .btn {
+    outline: none;
+    border: none;
+    width: auto;
+    margin: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+    position: relative;
+    font-weight: 300px;
+    padding: 5px 15px;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 5px #efa424;
+    background-color: #fcad26;
+  }
+
+  .btn img {
+    width: 30px;
+  }
+
+  .btn:hover {
+    box-shadow: 0 4px #efa424;
+    top: 2px;
+  }
+  
+  .btn:active {
+    box-shadow: none;
+    top: 6px;
+  }
