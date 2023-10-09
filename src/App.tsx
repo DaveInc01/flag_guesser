@@ -1,16 +1,12 @@
-import React, {createElement as e} from 'react'
-import { Routes, Route } from 'react-router-dom';
-import {Login} from './components/Login'
-import {Register} from './components/Register'
+import { RouterComponent } from './components/Router'
+import './index.css'
 
 function App(){
   return (
     <div className="app">
-      <Login />
-      <Routes>
-          <Route path="/Register" element={<Register />} />
-          <Route path="/Login" element={<Login />} />
-       </Routes>
+      <div className='screen-background'></div>
+      <div className='screen-filter'></div>
+      <RouterComponent />
     </div>
   )
 }
