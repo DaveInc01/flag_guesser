@@ -1,8 +1,3 @@
+import '../../style/Container.css';
 
-const containerStyle:React.CSSProperties = {
-    marginLeft: '20%',
-    marginRight: '20%',
-    backgroundColor: '#1e384a',
-    height: '100vh'
-}
-export const Container = ({children}: any) => (<main style={containerStyle}>{children}</main>)
+export const Container = ({children}: any) => (<main className="page-container">{children}</main>)

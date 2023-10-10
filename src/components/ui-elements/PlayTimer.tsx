@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import './PlayTimer.css';
+import '../../style/PlayTimer.css';
+
 export const PlayTimer = ({startTime, onFinish}:{startTime: number, onFinish: () => void})=>{
     const [timeLeft, setTimeLeft] = useState<number>(startTime)
     const pad = (n:number) => n < 10 ? `0${n}` : n;

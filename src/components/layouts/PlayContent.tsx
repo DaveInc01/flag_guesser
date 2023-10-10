@@ -1,6 +1,8 @@
 import { ICountry } from "../../constants/countries";
-import { CardFlag } from "../ui-elements/card-flag/CardFlag";
-import './PlayContent.css'
+import { CardFlag } from "../ui-elements/CardFlag";
+
+import '../../style/PlayContent.css'
+import { useState } from "react";
 
 const flagTableStyle:React.CSSProperties = {
     display: "grid",
@@ -8,17 +10,23 @@ const flagTableStyle:React.CSSProperties = {
     gridGap: "15px"
 }
 
-export const PlayContent = ({score, countries}:{score:number, countries: ICountry[]})=> 
-(
+export const PlayContent = ({score, countries}:{score:number, countries: ICountry[]})=> {
+
+const [activeFlagName, setActiveFlagName] = useState<ICountry['country']>('');
+const rightFlag = countries[0];
+
+return (
     <div className="play-content">
         <div className="score">{`score: ${score}`}</div>
-        <h2>{countries[0].country}</h2>
+        <h2>{rightFlag.country}</h2>
         <div style={flagTableStyle}>
-            {countries.map(country=>
-                <CardFlag 
-                    rightCountryCode={countries[0].code} 
-                    country={country} />)}
+            {countries.map((country, key)=>
+                <CardFlag
+                    key={key}
+                    country={country} 
+                    className={''} 
+                    clickCallback={(countryName, ev) => setActiveFlagName(countryName)}  />)}
         </div>
     </div>
 
-)
+)}
