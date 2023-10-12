@@ -12,3 +12,8 @@
     font-family: "DelaGothicOne";
     color: rgb(255, 255, 250);
 }
+
+.timer-time {
+    font-size: 30px;
+    transition-duration: 500ms;
+}

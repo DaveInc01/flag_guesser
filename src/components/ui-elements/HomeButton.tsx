@@ -1,7 +1,7 @@
 import '../../index.css'
 
-export const HomeButton = (props: {title: string}) => {
-    const {title} = props;
+export const HomeButton = (props: {title: string, onClick?: () => void}) => {
+    const {title, onClick} = props;
     const styles:React.CSSProperties = {
         width: '300px',
         cursor: 'pointer',
@@ -16,5 +16,5 @@ export const HomeButton = (props: {title: string}) => {
         boxShadow: '1px 5px #85381c',
         fontFamily: 'DelaGothicOne',
     }
-    return (<div className="btn-home" style={styles}>{title}</div>)
+    return (<div className="btn-home" onClick={onClick} style={styles}>{title}</div>)
 }
