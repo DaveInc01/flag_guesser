@@ -1,15 +1,25 @@
-.card-success {
-    border: 2px solid green;
-}
-
-.card-danger {
-    border: 2px solid red;
+.card-success {border-color: #2fa52f!important}
+.card-danger {border-color: #c43f3f!important}
+.card-success, .card-danger {
+    padding: 5px;
+    border: 5px solid;
+    border-radius: 30px;
 }
 
 .main-card {
     margin: auto;
+    cursor: pointer;
+    padding: 0 20px;
+    user-select: none;
 }
-
-.main-card span img{
-    width: 200px!important;
+.main-card span {
+    display: block;
+    overflow: hidden;
+    align-items: center;
+    display: flex!important;
+}
+.main-card span img {
+    height: 160px;
+    object-fit: contain;
+    max-width: 200px!important;
 }

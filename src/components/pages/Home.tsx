@@ -19,7 +19,7 @@ export const HomePage:ComponentType<{}>  = () => {
         <React.Fragment>
             <HomeHeader />
             <div className="home-menu" style={menuStyle}>
-                {navigationItems.map(({title, path}, index) => <Link to={path}><HomeButton key={index} title={title} /></Link>)}
+                {navigationItems.map(({title, path}, index) => <Link to={path} key={index}><HomeButton key={index} title={title} /></Link>)}
             </div>
         </ React.Fragment>
     )
