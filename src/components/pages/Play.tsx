@@ -1,16 +1,15 @@
-import  { ICountry, Countries } from "../../constants/countries";
-import { Container } from "../layouts/Container";
-import { PlayContent } from "../layouts/PlayContent";
-import { InfoDeskButton } from "../ui-elements/InfoDeskButton";
-import { ButtonIcon } from "../ui-elements/ButtonIcon";
-import { PlayTimer } from "../ui-elements/PlayTimer";
-import { paths } from "../../constants/paths";
-import { CSSProperties, useEffect, useState } from "react";
 import { random, shuffle } from 'lodash';
-import { ICardFlag } from "../ui-elements/CardFlag";
-import { GameConfig } from "../../constants/game-config";
-import { Hearts } from "../ui-elements/Hearts";
 import { LoseModal } from "../modals/Lose";
+import { paths } from "../../constants/paths";
+import { Hearts } from "../ui-elements/Hearts";
+import { Container } from "../layouts/Container";
+import { ICardFlag } from "../ui-elements/CardFlag";
+import { PlayContent } from "../layouts/PlayContent";
+import { PlayTimer } from "../ui-elements/PlayTimer";
+import { ButtonIcon } from "../ui-elements/ButtonIcon";
+import { GameConfig } from "../../constants/game-config";
+import { CSSProperties, useEffect, useState } from "react";
+import  { ICountry, Countries } from "../../constants/countries";
 
 const headerStyle:CSSProperties = {
     display:'flex', 
@@ -77,7 +76,9 @@ export const PlayPage = () => {
 
     const onTimerRestart = () => {
         clearTimeout(timeoutTime)
-        setTime(GameConfig.parameters.time);
+        setTimeout(()=>{
+            setTime(GameConfig.parameters.time);
+        }, 2000)
     }
 
     const onTimerClear = () => {
@@ -123,7 +124,10 @@ export const PlayPage = () => {
     }, [hearts]);
 
     useEffect(() => {
-        if(!lose) onTimerStart();
+        if(!lose) {
+            onTimerStart();
+            console.log("onTimerStart")
+        }
         if(lose) onTimerClear();
     }, [time]);
 

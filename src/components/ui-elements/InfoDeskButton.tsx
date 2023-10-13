@@ -4,7 +4,10 @@ type IInfoDeskButton = {
     icon: string, 
     text: string,
     className?: string,
-    action?: {actionIcon: string, clickCallback: (ev: MouseEvent<HTMLElement>)=>void}
+    action?: {
+        actionIcon: string, 
+        onClickLeftIcon?: (ev: MouseEvent<HTMLElement>)=>void, 
+        onClickRightIcon?: (ev: MouseEvent<HTMLElement>)=>void}
 }
 
 const InfoDeskStyle:CSSProperties ={
@@ -43,13 +46,13 @@ export const InfoDeskButton = ({
    return (
     <div style={InfoDeskStyle} className={className}>
         <span>
-            <img style={InfoDeskButtonStyle} src={icon}/>
+            <img style={InfoDeskButtonStyle} src={icon} onClick={action?.onClickLeftIcon}/>
         </span>
         <span style={textStyle}>
             {text}
         </span>
         {action?.actionIcon && <span>
-            <img style={InfoDeskButtonStyle} src={action.actionIcon} onClick={action.clickCallback}/>
+            <img style={InfoDeskButtonStyle} src={action.actionIcon} onClick={action?.onClickRightIcon}/>
         </span>}
     </div>
    )

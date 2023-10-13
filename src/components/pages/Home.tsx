@@ -13,7 +13,6 @@ export const HomePage:ComponentType<{}>  = () => {
         flexDirection: "column",
         justifyContent: "center",
     }
-    
 
     return (
         <React.Fragment>
