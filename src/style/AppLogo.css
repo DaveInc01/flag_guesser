@@ -1,0 +1,14 @@
+@font-face {
+    font-family: Orpheus;
+    src: url(../../public/assets/fonts/Orpheus.ttf);
+}
+
+.app-logo {
+    font-family: Orpheus;
+    font-size: 65px;
+    text-align: center;
+    color: rgb(255, 255, 250);
+    display: block;
+    letter-spacing: 4px;
+
+}

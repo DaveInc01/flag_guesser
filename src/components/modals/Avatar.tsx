@@ -48,7 +48,7 @@ export const AvatarModal = ({onDissmis}:{onDissmis: () => void}) => {
             {Object.keys(AvatarGroups).map((groupName, groupIndex) => <div style={modalItemStyle}>
               <h2 className="menu-item-title" style={itemTitleStyle}>{groupName}</h2>
                 <div>
-                    {AvatarGroups[groupName].map(({src, title, rerityLeve}, index) => <AvatarItem opt={{locked: !!index || !!groupIndex}} avatar={{rerityLeve, src, title}} />)}
+                    {AvatarGroups[groupName].map(({_id, src, title, rerityLeve, frameTheam}, index) => <AvatarItem opt={{locked: !(!!index || !!groupIndex)}} avatar={{_id, rerityLeve, src, title, frameTheam}} />)}
                 </div>
             </div>)}
         </div>

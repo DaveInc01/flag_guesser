@@ -2,7 +2,11 @@ import { Fragment, useState } from "react";
 import { Countries } from "../../constants/countries";
 import { InfoDeskButton } from "../ui-elements/InfoDeskButton";
 import { AvatarModal } from "../modals/Avatar";
-import { wallet } from "../../services/wallet";
+import { useAppSelector } from "../../app/hooks";
+import { AppLogo } from "../ui-elements/AppLogo";
+import { MaxScore } from "../ui-elements/MaxScore";
+import { selectorCoins, selectorEnergy, selectorMaxScore, selectorUsername } from "../../features/user/userSelector";
+
 const country = Countries.find(({code}) => code === 'am')
     
 const sectStyle: React.CSSProperties = {
@@ -11,14 +15,18 @@ const sectStyle: React.CSSProperties = {
 }
 
 export const HomeHeader = () => {
-const [openAvatarMenu, setOpenAvatarMenu] = useState<boolean>(false);
-const [coins, setCoins] = useState<number>(wallet.coins)
+   const coins = useAppSelector(selectorCoins);
+   const username = useAppSelector(selectorUsername);
+   const energy = useAppSelector(selectorEnergy);
+   const maxScore = useAppSelector(selectorMaxScore);
+   const [openAvatarMenu, setOpenAvatarMenu] = useState<boolean>(false);
+
 return (
     <Fragment>
         <section style={sectStyle}>
             <div>
                 <InfoDeskButton
-                    text={"Vahan"} 
+                    text={username.toString()} 
                     className="avatar-desk" 
                     icon="/assets/images/avatars/abc-warriors-characters/black-blood.png"
                     action={{
@@ -28,15 +36,17 @@ return (
             </div>
             <div style={{display:'flex'}}>
                 <InfoDeskButton 
-                    text="400" 
+                    text={energy.toString()} 
                     icon="/assets/images/home/energy.png"
                     action={{actionIcon: "/assets/images/home/plus.png", onClickRightIcon: (e)=> console.log(e)}}/>
-                {/* <InfoDeskButton 
-                    text={coins}
+                <InfoDeskButton 
+                    text={coins.toString()}
                     icon="/assets/images/home/coin.png"
-                    action={{actionIcon: "/assets/images/home/plus.png", clickCallback: (e)=>console.log(e)}}/> */}
+                    action={{actionIcon: "/assets/images/home/plus.png", onClickRightIcon: (e)=>console.log(e)}}/>
             </div>
         </section>
+        <AppLogo text="FlagGuesser" />
+        <MaxScore text={`max score: ${maxScore}`} className="home-max-score"/>
         {openAvatarMenu && <AvatarModal onDissmis={() => setOpenAvatarMenu(!openAvatarMenu)}/>}
     </Fragment>
 )}

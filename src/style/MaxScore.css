@@ -1,0 +1,14 @@
+
+.home-max-score, .play-score{
+    display: block;
+    text-align: center;
+    color: rgb(255,255,250);
+    font-family: DelaGothicOne;
+    font-size: 20px;
+}
+
+.home-max-score{
+    text-transform: capitalize;
+}
+
+.play-score{}

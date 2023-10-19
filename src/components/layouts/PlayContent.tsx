@@ -1,6 +1,7 @@
 import { ICountry } from "../../constants/countries";
 import { CardFlag } from "../ui-elements/CardFlag";
 import '../../style/PlayContent.css';
+import { MaxScore } from "../ui-elements/MaxScore";
 
 const flagTableStyle:React.CSSProperties = {
     display: "grid",
@@ -28,7 +29,7 @@ export const PlayContent = ({
 }: IPlayContent)=> {
 return (
     <div className="play-content">
-        <div className="score">{`score: ${score}`}</div>
+        <MaxScore text={`score: ${score}`} className="play-score"/>
         <h2>{rightCountryName}</h2>
         <div style={{...flagTableStyle, ...style}}>
             {countries.map((country, key)=>

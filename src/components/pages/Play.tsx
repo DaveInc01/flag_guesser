@@ -10,6 +10,10 @@ import { ButtonIcon } from "../ui-elements/ButtonIcon";
 import { GameConfig } from "../../constants/game-config";
 import { CSSProperties, useEffect, useState } from "react";
 import  { ICountry, Countries } from "../../constants/countries";
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { decrementEnergy, incrementCoins, incrementMaxScore } from '../../features/user/userSlice';
+import { selectorEnergy, selectorMaxScore } from '../../features/user/userSelector';
+import { InfoDeskButton } from '../ui-elements/InfoDeskButton';
 
 const headerStyle:CSSProperties = {
     display:'flex', 
@@ -18,6 +22,12 @@ const headerStyle:CSSProperties = {
     marginRight: '10px',
     marginBottom: '25px',
     justifyContent: 'space-between', 
+}
+
+const noneDesk:CSSProperties = {
+    backgroundColor: '#1e384a!important',
+    border: 'none!important',
+    boxShadow: '#1e384a 0px 0px!important'
 }
 
 function removeSolives(countries: ICardFlag['country'][], solvedCountryNames: ICountry['countryName'][]): ICardFlag['country'][]{
@@ -44,15 +54,33 @@ function getCountriesWithEmptyClassess(countries: ICountry[]):ICardFlag['country
 
 export const PlayPage = () => {
     var timeoutTime:NodeJS.Timeout;
-    const [lose, setLose] = useState<boolean>(false);
+    const energy = useAppSelector(selectorEnergy);
+    const dispatch = useAppDispatch();
+    const maxScore = useAppSelector(selectorMaxScore)
+
+    const [lose, setLose] = useState<boolean>(false)
     const [disableEvent, setDisableEvent] = useState<boolean>(false);
     const [time, setTime] = useState<number>(GameConfig.parameters.time)
-    const [score, setScore] = useState<number>(GameConfig.parameters.scores);
+    const [score, setScore] = useState<number>(GameConfig.parameters.score)
+
     const [hearts, setHearts] = useState<number>(GameConfig.parameters.hearts);
     const [fourCountries, setFourCountries] = useState<ICardFlag['country'][]>(makeFourCountries(getCountriesWithEmptyClassess(Countries), []));
     const [rightCountryName, setRightCountryName] = useState<ICountry['countryName']>(makeRightCountryName(fourCountries));
     const [solvedCountryNames, setSolvedCountryNames] = useState<ICountry['countryName'][]>([]);
     const [selectedCountryName, setSelectedCountryName] = useState<ICountry['countryName']>('');
+    
+    const PlayDispatch = useAppDispatch()
+
+    const RestartGame = ()=>{
+        setLose(false)
+        dispatch(decrementEnergy())
+        setHearts(GameConfig.parameters.hearts)
+        setScore(GameConfig.parameters.score)
+        clearTimeout(timeoutTime)
+        setTime(GameConfig.parameters.time)
+        nextQuestion()
+        Promise.resolve(new Promise((r) => setTimeout(() => r(null), 600)))
+    }
 
     const nextQuestion = () => {
         setSolvedCountryNames([...solvedCountryNames, selectedCountryName]);
@@ -97,7 +125,6 @@ export const PlayPage = () => {
     const onSelect = (selectedCountryName: ICountry['countryName']) => {
         if(!lose) onTimerRestart();
         if(lose) onTimerClear();
-
         setSelectedCountryName(selectedCountryName);
 
         setDisableEvent(true)
@@ -120,35 +147,46 @@ export const PlayPage = () => {
     }
 
     useEffect(() => {
-        if(!hearts) setLose(true);
+        if(!hearts) {
+            setLose(true);
+            if(score > maxScore) dispatch(incrementMaxScore(score))
+            dispatch(incrementCoins(score * 5))
+        }
     }, [hearts]);
 
     useEffect(() => {
         if(!lose) {
             onTimerStart();
-            console.log("onTimerStart")
         }
         if(lose) onTimerClear();
     }, [time]);
 
-    return (
-        <div>
-            <Container>
-                <header style={headerStyle}>
-                    <ButtonIcon path={paths.Home} icon="/assets/images/icons/forward-left.svg" clickCallback={() => {}}/>
-                    <PlayTimer currentTime={time} />
-                    <Hearts maxCount={3} count={hearts}/>
-                </header>
-                <PlayContent
-                    style={{pointerEvents:disableEvent || lose ?'none':'all'}} 
-                    score={score}
-                    rightCountryName={rightCountryName} 
-                    onSelect={(cName: ICountry['countryName']) => onSelect(cName)} 
-                    onSetScore={() => {}}
-                    onTimeUp={() => {}}
-                    countries={fourCountries}/>
 
-                {lose && <LoseModal score={score} />}
-            </Container>
-        </div>
-    )}
+return (
+    <div>
+        <Container>
+            <header style={headerStyle}>
+                <ButtonIcon path={paths.Home} icon="/assets/images/icons/forward-left.svg" clickCallback={() => {}}/>
+                <PlayTimer currentTime={time} />
+                <div>
+                    <InfoDeskButton 
+                        text={energy.toString()} 
+                        icon="/assets/images/home/energy.png"
+                        noneDesk={true} 
+                    />
+                    <Hearts maxCount={3} count={hearts}/>
+                </div>
+            </header>
+            <PlayContent
+                style={{pointerEvents:disableEvent || lose ?'none':'all'}} 
+                score={score}
+                rightCountryName={rightCountryName} 
+                onSelect={(cName: ICountry['countryName']) => onSelect(cName)} 
+                onSetScore={() => {}}
+                onTimeUp={() => {}}
+                countries={fourCountries}/>
+            
+            {lose && <LoseModal score={score} callBack={RestartGame} />}
+        </Container>
+    </div>
+)}
