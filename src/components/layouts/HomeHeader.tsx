@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Countries } from "../../constants/countries";
 import { InfoDeskButton } from "../ui-elements/InfoDeskButton";
 import { AvatarModal } from "../modals/Avatar";
@@ -6,6 +6,7 @@ import { useAppSelector } from "../../app/hooks";
 import { AppLogo } from "../ui-elements/AppLogo";
 import { MaxScore } from "../ui-elements/MaxScore";
 import { selectorCoins, selectorEnergy, selectorMaxScore, selectorUsername } from "../../features/user/userSelector";
+// import { useSpring, animated } from "react-spring";
 
 const country = Countries.find(({code}) => code === 'am')
     
@@ -20,7 +21,9 @@ export const HomeHeader = () => {
    const energy = useAppSelector(selectorEnergy);
    const maxScore = useAppSelector(selectorMaxScore);
    const [openAvatarMenu, setOpenAvatarMenu] = useState<boolean>(false);
-
+//    useEffect(()=>{
+//         const energyProps = useSpring({val: energy, from:{val: energy + 1}})
+//    }, [energy])
 return (
     <Fragment>
         <section style={sectStyle}>
