@@ -1,5 +1,6 @@
-import { CSSProperties, MouseEvent } from "react"
+import { CSSProperties, MouseEvent, useEffect } from "react"
 import { NumberAnimation } from "../animations/NumberAnimation"
+import { ISounds } from "../../constants/media"
 
 type IInfoDeskButton = {
     icon: string, 
@@ -58,7 +59,7 @@ export const InfoDeskButton = ({
         noneDesk,
         action,
     }:IInfoDeskButton) => {
-        
+
    return (
     <div style={noneDesk ? InfoDeskStyle : WithDeskStyle}>
         <span>

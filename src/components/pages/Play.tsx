@@ -14,6 +14,9 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { decrementEnergy, incrementCoins, incrementMaxScore } from '../../features/user/userSlice';
 import { selectorEnergy, selectorMaxScore } from '../../features/user/userSelector';
 import { InfoDeskButton } from '../ui-elements/InfoDeskButton';
+import { selectorSounds } from "../../features/user/userSelector";
+import { playSound } from "../../services/audio";
+import { ISounds } from '../../constants/media';
 
 const headerStyle:CSSProperties = {
     display:'flex', 
@@ -57,7 +60,8 @@ export const PlayPage = () => {
     const energy = useAppSelector(selectorEnergy);
     const dispatch = useAppDispatch();
     const maxScore = useAppSelector(selectorMaxScore)
-
+    const sounds = useAppSelector(selectorSounds)
+    var   timerSound = new Audio(ISounds._time)
     const [lose, setLose] = useState<boolean>(false)
     const [disableEvent, setDisableEvent] = useState<boolean>(false);
     const [time, setTime] = useState<number>(GameConfig.parameters.time)
@@ -69,8 +73,10 @@ export const PlayPage = () => {
     const [solvedCountryNames, setSolvedCountryNames] = useState<ICountry['countryName'][]>([]);
     const [selectedCountryName, setSelectedCountryName] = useState<ICountry['countryName']>('');
     
-    const PlayDispatch = useAppDispatch()
-
+    const stopSound = (audio:HTMLAudioElement)=>{
+        audio.pause()
+        audio.currentTime = 0;
+    }
     const RestartGame = ()=>{
         setLose(false)
         dispatch(decrementEnergy())
@@ -115,11 +121,14 @@ export const PlayPage = () => {
     }
 
     const onTimeIsUp = () => {
-        if(!lose){
-            setTime(GameConfig.parameters.time);
-            if (hearts) setHearts(hearts - 1)
-            nextQuestion();
-        }
+        stopSound(timerSound)
+        playSound(ISounds.wrong, sounds).then(()=>{
+            if(!lose){
+                setTime(GameConfig.parameters.time);
+                if (hearts) setHearts(hearts - 1)
+                nextQuestion();
+            }
+        })
     }
     
     const onSelect = (selectedCountryName: ICountry['countryName']) => {
@@ -131,8 +140,18 @@ export const PlayPage = () => {
 
         const isCorrectAnswer =  selectedCountryName === rightCountryName;
 
-        if (isCorrectAnswer) setScore(score + 1)
-        if (!isCorrectAnswer && hearts) setHearts(hearts - 1);
+        if (isCorrectAnswer){
+            stopSound(timerSound)
+            playSound(ISounds.correct, sounds).then(()=>{
+                setScore(score + 1)
+            })
+        } 
+        if (!isCorrectAnswer && hearts){
+            stopSound(timerSound)
+            playSound(ISounds.wrong, sounds).then(()=>{
+                setHearts(hearts - 1);
+            })
+        } 
 
         setFourCountries(fourCountries.map(c => {
             if(c.countryName === rightCountryName) return {...c, className: 'card-success'}
@@ -155,18 +174,24 @@ export const PlayPage = () => {
     }, [hearts]);
 
     useEffect(() => {
+        if (time === 3)
+            timerSound.play()
         if(!lose) {
             onTimerStart();
         }
         if(lose) onTimerClear();
     }, [time]);
 
+    const backBtnClick = ()=>{
+        stopSound(timerSound)
+        playSound(ISounds.button, sounds)
+    }
 
 return (
     <div>
         <Container>
             <header style={headerStyle}>
-                <ButtonIcon path={paths.Home} icon="/assets/images/icons/forward-left.svg" clickCallback={() => {}}/>
+                <ButtonIcon path={paths.Home} icon="/assets/images/icons/forward-left.svg" clickCallback={backBtnClick}/>
                 <PlayTimer currentTime={time} />
                 <div>
                     <InfoDeskButton 

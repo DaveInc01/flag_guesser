@@ -1,17 +1,22 @@
-import React, { ComponentType } from "react"
+import React, { ComponentType, useEffect } from "react"
 import { HomeButton } from "../ui-elements/HomeButton";
-import '../../index.css';
 import { navigationItems } from "../../constants/navigation";
 import { useNavigate } from "react-router-dom";
 import { HomeHeader } from "../layouts/HomeHeader";
 import { paths } from "../../constants/paths";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { decrementCoins, decrementEnergy } from "../../features/user/userSlice";
-import { useDispatch } from "react-redux";
+
+import '../../index.css';
+import { playSound } from "../../services/audio";
+import { ISounds } from "../../constants/media";
+import { selectorSounds } from "../../features/user/userSelector";
 
 export const HomePage:ComponentType<{}>  = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
+    const sounds   = useAppSelector(selectorSounds)
+
     const menuStyle:React.CSSProperties = {
         display: "flex",
         alignItems: "center",
@@ -25,16 +30,16 @@ export const HomePage:ComponentType<{}>  = () => {
             <div className="home-menu" style={menuStyle}>
                 {navigationItems.map(({title, path}, index) =>
                     <HomeButton key={index} title={title} onClick={() => {
-                        if(path.includes(paths.Play)) {
-                            dispatch(decrementEnergy());
-                            
-                            Promise
-                            .resolve(new Promise((r) => setTimeout(() => r(null), 600)))
-                            .then(() => navigate(path))
-                            
-                        } else {
-                            navigate(path)
-                        }
+                        playSound(ISounds.button, sounds).then(() => {
+                            if(path.includes(paths.Play)) {
+                                dispatch(decrementEnergy())
+                                Promise
+                                .resolve(new Promise((r) => setTimeout(() => r(null), 200)))
+                                .then(() => navigate(path))
+                            } else {
+                                navigate(path)
+                            }
+                        })   
                     }} />
                 )}
             </div>

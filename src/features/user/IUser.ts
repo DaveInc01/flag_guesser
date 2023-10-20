@@ -13,4 +13,7 @@ export interface IUser {
         avatarIds:string[],
         energy: IntRange<0, 11>,
     },
+    settings: {
+        sounds: boolean
+    }
 }
