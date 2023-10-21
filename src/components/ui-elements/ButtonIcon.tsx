@@ -1,25 +1,22 @@
 import { MouseEvent } from "react";
 import '../../style/ButtonIcon.css';
-import { Link, NavLink } from "react-router-dom";
+import { playSound } from "../../services/audio";
+import { ISounds } from "../../constants/media";
 
 type IButtonIcon = {
     icon: string, 
-    path?: string,
     className?: string,
     clickCallback: (ev: MouseEvent<HTMLElement>)=>void
 }
 
 export const ButtonIcon = ({
         icon, 
-        path,
         className = '',
         clickCallback,
-    }: IButtonIcon) => {
-   return (
-    <NavLink to={path || ''}>
-        <button className={className.concat(' btn')}>
-            <img src={icon} onClick={clickCallback}/>
-        </button>
-    </NavLink>
-   )
-}
+    }: IButtonIcon) => (<span className={className}><button className="btn">
+        <img src={icon} onClick={e => {
+            clickCallback(e);
+            playSound(ISounds.button, true);
+        } }/>
+    </button></span>)
+

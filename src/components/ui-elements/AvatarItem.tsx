@@ -9,7 +9,7 @@ export const AvatarItem = ({avatar: {src, title, rerityLeve, frameTheam = FrameT
     const pictureClassName = !locked ? 'avatar-picture' : 'avatar-picture locked';
     const avatarNameClassName = !locked ? 'avatar-name' : 'avatar-name locked';
     const frameClassName = !locked ? 'avatar-frame' : 'avatar-frame locked';
-    const frameStyle:CSSProperties = {backgroundColor: frameTheam}
+    const frameStyle:CSSProperties = {backgroundColor: !locked ? frameTheam : FrameTheams.dark}
     const isShine = rerityLeve.title == level4 || 
     
     rerityLeve.title == level5 || 

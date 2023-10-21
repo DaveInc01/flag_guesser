@@ -11,6 +11,7 @@ import '../../index.css';
 import { playSound } from "../../services/audio";
 import { ISounds } from "../../constants/media";
 import { selectorSounds } from "../../features/user/userSelector";
+import { SettingsSlide } from "../ui-elements/SettingsSlide";
 
 export const HomePage:ComponentType<{}>  = () => {
     const dispatch = useAppDispatch()
@@ -43,6 +44,7 @@ export const HomePage:ComponentType<{}>  = () => {
                     }} />
                 )}
             </div>
+            <SettingsSlide />
         </ React.Fragment>
     )
 }

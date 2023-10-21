@@ -17,6 +17,7 @@ import { InfoDeskButton } from '../ui-elements/InfoDeskButton';
 import { selectorSounds } from "../../features/user/userSelector";
 import { playSound } from "../../services/audio";
 import { ISounds } from '../../constants/media';
+import { useNavigate } from 'react-router-dom';
 
 const headerStyle:CSSProperties = {
     display:'flex', 
@@ -59,6 +60,7 @@ export const PlayPage = () => {
     var timeoutTime:NodeJS.Timeout;
     const energy = useAppSelector(selectorEnergy);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const maxScore = useAppSelector(selectorMaxScore)
     const sounds = useAppSelector(selectorSounds)
     var   timerSound = new Audio(ISounds._time)
@@ -184,14 +186,14 @@ export const PlayPage = () => {
 
     const backBtnClick = ()=>{
         stopSound(timerSound)
-        playSound(ISounds.button, sounds)
+        playSound(ISounds.button, sounds).then(() => navigate(paths.Home))
     }
 
 return (
     <div>
         <Container>
             <header style={headerStyle}>
-                <ButtonIcon path={paths.Home} icon="/assets/images/icons/forward-left.svg" clickCallback={backBtnClick}/>
+                <ButtonIcon icon="/assets/images/icons/forward-left.svg" clickCallback={backBtnClick}/>
                 <PlayTimer currentTime={time} />
                 <div>
                     <InfoDeskButton 

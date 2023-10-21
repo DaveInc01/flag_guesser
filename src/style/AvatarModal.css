@@ -1,0 +1,16 @@
+.modal-content {
+    display: inline-flex;
+}
+.modal-btn {
+    top: 50%;
+    z-index: 10;
+    position: absolute;
+    transform: translateY(-50%);
+}
+.modal-btn.forward-left {
+    left: 0;
+}
+
+.modal-btn.forward-right {
+    right: 0;
+}
