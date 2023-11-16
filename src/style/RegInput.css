@@ -1,0 +1,22 @@
+.main-div{
+    min-height: 60px;
+}
+
+.input-password {
+    position: absolute;
+    width: 327px;
+    padding-left: 3px;
+}
+
+.pass-eye{
+    position: relative;
+    float: right;
+    right: 10px;
+    top: 15px;
+    width: 20px;
+}
+
+.password-span{
+    position:relative;
+    top:50px
+}

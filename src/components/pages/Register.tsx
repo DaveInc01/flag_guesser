@@ -1,22 +1,25 @@
 import React, { ComponentType } from 'react'
 import '../../style/Login.css'
 import { Link } from 'react-router-dom';
+import { RegInput } from '../ui-elements/RegInput';
+
+
+const passworWalidation = (username:string, password:string, rePassword:string) =>{
+
+}
 
 export const RegisterPage:ComponentType<{}> = () => (
 	<div>
 		<form style={{height: 610}}>
 			<h3>Register Now</h3>
 
-			<label htmlFor="username">Username</label>
-			<input type="text" placeholder="Username" id="username" />
-
-			<label htmlFor="password">Password</label>
-			<input type="password" placeholder="Password" id="password" />
-			<label htmlFor="password">Reenter Password</label>
-			<input type="password" placeholder="Reenter same password" id="password" />
+			
+			<RegInput name='Username'/>
+			<RegInput name='Password'/>
+			<RegInput name='Reenter Password'/>
 			<br />
 			<Link to="./Login"  className='underline'>Login</Link>
-			<button>Register</button>
+			<button formMethod='post'>Register</button>
 		</form>
 	</div>
 )
