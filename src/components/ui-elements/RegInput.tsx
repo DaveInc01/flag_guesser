@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import '../../style/RegInput.css'
-
+import axios from 'axios'
 
 interface IRegInput{
     name:string,
     retValue: string 
 }
 
-export const RegInput = ({inputName,handleValue}:{inputName:string, handleValue(field:number, event: any):any}) =>{
+export const RegInput = ({inputName,handleValue}:{inputName:string, handleValue(field:number, event: React.ChangeEvent<HTMLInputElement>):any}) =>{
     const [show_pass, set_show_pass]= useState(true)
 
     let field:number = 0
@@ -16,20 +16,23 @@ export const RegInput = ({inputName,handleValue}:{inputName:string, handleValue(
         case 'Username':
             field = 0   
             break;
+        case 'E-mail':
+            field = 1   
+            break;
         case 'Password':
-            field = 1 
+            field = 2 
             break  
         case 'RePassword':
-            field = 2  
+            field = 3  
             break 
     }
 
     return (
         <div className='main-div'>
             <label htmlFor="password">{inputName}</label>
-            <input type={(field > 0 && show_pass) ? 'password' : 'text'} placeholder={inputName} className={field > 0 ? 'input-password' : 'input-text'} onChange={(e) => handleValue(field, e)}/>
+            <input type={(field > 1 && show_pass) ? 'password' : 'text'} placeholder={inputName} className={field > 0 ? 'input-password' : 'input-text'} onChange={(e) => handleValue(field, e)}/>
             {
-                field > 0 && 
+                field > 1 && 
                 <img src='assets/images/icons/eye.png' style={{cursor: 'pointer'}} className='pass-eye' alt="" onClick={() => set_show_pass(!show_pass)} />
             }
         </div>
