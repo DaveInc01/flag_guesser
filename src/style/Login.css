@@ -38,8 +38,12 @@ label{
     font-size: 16px;
     font-weight: 500;
 }
-input{
-    display: block;
+.input-field input {
+  width: 90%;
+  height: 100%;
+  background-color: transparent;
+}
+.input-field {
     height: 50px;
     width: 100%;
     background-color: #ffffff;
@@ -48,6 +52,14 @@ input{
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
+}
+.pass-eye img {
+  width: 25px;
+  height: 25px;
+  transform: translateY(50%);
+}
+.input-field .pass-eye, .input-field input {
+  display: inline-block;
 }
 ::placeholder{
     color: #e5e5e5;

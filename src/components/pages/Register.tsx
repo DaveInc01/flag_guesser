@@ -76,11 +76,13 @@ export const RegisterPage:ComponentType<{}> = () => {
 		<div>
 			<form>
 				<h3>Register Now</h3>
-				<span className='errorLog'>{errorLog}</span>			
+				<span className='errorLog'>{errorLog}</span>	
+
 				<RegInput inputName='Username' handleValue={handleValue} />
 				<RegInput inputName='E-mail' handleValue={handleValue} />
 				<RegInput inputName='Password' handleValue={handleValue}/>
 				<RegInput inputName='RePassword' handleValue={handleValue} />
+				
 				<br />
 				<Link to="./Login"  className='underline'>Login</Link>
 				<button className='auth-button' onClick={(e)=> validateInputs(e, setErrorLog)}>Register</button>

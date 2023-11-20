@@ -30,11 +30,13 @@ export const RegInput = ({inputName,handleValue}:{inputName:string, handleValue(
     return (
         <div className='main-div'>
             <label htmlFor="password">{inputName}</label>
-            <input type={(field > 1 && show_pass) ? 'password' : 'text'} placeholder={inputName} className={field > 0 ? 'input-password' : 'input-text'} onChange={(e) => handleValue(field, e)}/>
-            {
-                field > 1 && 
-                <img src='assets/images/icons/eye.png' style={{cursor: 'pointer'}} className='pass-eye' alt="" onClick={() => set_show_pass(!show_pass)} />
-            }
+            <div className="input-field">
+                <input type={(field > 1 && show_pass) ? 'password' : 'text'} placeholder={inputName} className={field > 0 ? 'input-password' : 'input-text'} onChange={(e) => handleValue(field, e)}/>
+                {field > 1 && 
+                    <div className="pass-eye">
+                        <img src='assets/images/icons/eye.png' style={{cursor: 'pointer'}} alt="" onClick={() => set_show_pass(!show_pass)} />	
+                    </div>}
+            </div>	
         </div>
     )
         
