@@ -2,6 +2,7 @@ import React, { ComponentType, useState } from 'react'
 import '../../style/Login.css'
 import { Link } from 'react-router-dom';
 import { RegInput } from '../ui-elements/RegInput';
+import axios, { AxiosRequestConfig } from 'axios';
 
 
 const usernameValid = /^[0-9A-Za-z]{4,16}$/
@@ -16,6 +17,13 @@ export enum fields {
 	'rePassword'
 }
 
+interface IUserinputData{
+	username:string,
+	email: string,
+	password:string,
+	rePassword:string
+}
+
 const userinputData:IUserinputData = {
 	username: '',
 	email: '',
@@ -23,12 +31,6 @@ const userinputData:IUserinputData = {
 	rePassword: ''
 }
 
-interface IUserinputData{
-	username:string,
-	email: string,
-	password:string,
-	rePassword:string
-}
 const handleValue = (field:number, event:any)=>{
 	if(field === fields.username)
 		userinputData.username = event.target.value
@@ -40,13 +42,23 @@ const handleValue = (field:number, event:any)=>{
 		userinputData.rePassword = event.target.value
 }
 
+const sendPostRequest = (userinputData:IUserinputData)=>{
+	const config:AxiosRequestConfig = {
+        method: "post",
+        url: 'http://localhost:8888/auth/register',
+        headers: {"Content-Type": "application/json"},
+        data: userinputData,
+    };
+	axios(config).then(res => console.log(res)).catch(err => console.log("FUCKEN ERROR: ", err))
+}
+
 function validateInputs(e:React.MouseEvent<HTMLButtonElement, MouseEvent>, setErrorLog:React.Dispatch<React.SetStateAction<string>>): void {
 	e.preventDefault();
+	
 	if (!usernameValid.test(userinputData.username))
 	{
 		errorInput = fields.username
 		setErrorLog('Username: between 6 and 16 characters, alphanumeric only')
-
 	}
 	else if (!emailValid.test(userinputData.email))
 	{
@@ -66,7 +78,7 @@ function validateInputs(e:React.MouseEvent<HTMLButtonElement, MouseEvent>, setEr
 	}
 	else{
 		setErrorLog('')
-		console.log("All is OK")
+		sendPostRequest(userinputData)
 	}
 }
 export const RegisterPage:ComponentType<{}> = () => {
