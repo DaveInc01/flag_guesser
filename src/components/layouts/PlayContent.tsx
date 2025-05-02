@@ -14,8 +14,8 @@ export type IPlayContent = {
     score:number, 
     countries: IItemFlag[],
     style?: React.CSSProperties,
-    rightCountryName: ICountry['countryName'],
-    onSelect: (selectedCountryName: ICountry['countryName']) => void,
+    rightCountryName: ICountry['name'],
+    onSelect: (selectedCountryName: ICountry['name']) => void,
     onTimeUp: () => void
     onSetScore: () => void,
 };

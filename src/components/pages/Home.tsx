@@ -16,7 +16,7 @@ import { SettingsSlide } from "../ui-elements/SettingsSlide";
 export const HomePage:ComponentType<{}>  = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
-    const sounds   = useAppSelector(selectorSounds)
+    let sounds   = useAppSelector(selectorSounds)
 
     const menuStyle:React.CSSProperties = {
         display: "flex",
@@ -24,7 +24,6 @@ export const HomePage:ComponentType<{}>  = () => {
         flexDirection: "column",
         justifyContent: "center",
     }
-    
     return (
         <React.Fragment>
             <HomeHeader />

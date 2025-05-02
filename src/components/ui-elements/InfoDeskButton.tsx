@@ -7,6 +7,7 @@ type IInfoDeskButton = {
     text: string,
     className?: string,
     noneDesk?: boolean,
+    isPlusButton: boolean,
     action?: {
         actionIcon: string, 
         onClickLeftIcon?: (ev: MouseEvent<HTMLElement>)=>void, 
@@ -57,9 +58,11 @@ export const InfoDeskButton = ({
         text, 
         className,
         noneDesk,
+        isPlusButton,
         action,
     }:IInfoDeskButton) => {
-
+        let endElem;
+        !isPlusButton ? endElem = `fi fi-${action?.actionIcon}` : endElem = ''
    return (
     <div style={noneDesk ? InfoDeskStyle : WithDeskStyle}>
         <span>
@@ -68,8 +71,9 @@ export const InfoDeskButton = ({
         <span style={textStyle}>
             {text}
         </span>
-        {action?.actionIcon && <span>
-            <img style={InfoDeskButtonStyle} src={action.actionIcon} onClick={action?.onClickRightIcon}/>
+        {action?.actionIcon && 
+        <span className={endElem} onClick={action?.onClickRightIcon} style={InfoDeskButtonStyle}>
+            {isPlusButton && <img style={InfoDeskButtonStyle} src={action.actionIcon}/>}
         </span>}
     </div>
    )

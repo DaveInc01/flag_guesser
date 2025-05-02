@@ -1,53 +1,55 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import '../../style/SettingsSlide.css'
 import { animated, useSpring } from 'react-spring';
+import { set } from 'lodash';
+import { selectorSounds } from "../../features/user/userSelector";
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { toggleSounds } from '../../features/user/userSlice';
+import { playSound } from "../../services/audio";
+import { ISounds } from '../../constants/media';
+
 
 export const SettingsSlide = ()=>{
-    const isTurnOff = false;
-    const [slide, setSlide] = useState(false);
+    const dispatch = useAppDispatch()
     const imgSoundOn = '/assets/images/icons/sound-on.png';
     const imgSoundOff = '/assets/images/icons/sound-off.png';
-    const moveSlide = () =>{
-        setSlide(!slide)
-        console.log(slide)
-    }
+    const [slide, setSlide] = useState(false);
+    const [sound, setSound] = useState(imgSoundOn);
 
-    const openStyle ={
-    width: "fit-content",
+    let sounds_settings = useAppSelector(selectorSounds)
+    // dispatch(toggleSounds(false));
+    const soundToggle = () => {
+        if (sound === imgSoundOn) {
+            setSound(imgSoundOff);
+            dispatch(toggleSounds(false));
+        } else {
+            setSound(imgSoundOn);
+            playSound(ISounds.button, true).catch(()=> console.log("sound error"));
+            dispatch(toggleSounds(true));
+        }
+    };
+    const slideStyle: React.CSSProperties = {
+        display: "flex",
     backgroundColor: "rgb(247, 145, 30)",
     padding: "6px",
     boxShadow: "rgb(133, 56, 28) 1px 5px",
     borderTopLeftRadius: "50px",
     borderBottomLeftRadius: "50px",
     position: "absolute",
-    right: "0"
-} 
-    const closeStyle ={
-    width: "fit-content",
-    backgroundColor: "rgb(247, 145, 30)",
-    padding: "6px",
-    boxShadow: "rgb(133, 56, 28) 1px 5px",
-    borderTopLeftRadius: "50px",
-    borderBottomLeftRadius: "50px",
-    position: "absolute",
-    right: "-9"
-    } 
-    // const openCloseAnimation = useSpring({
-    //     to: {
+    right: "0",
+    marginTop: "20px"
+}
 
-    //     },
-    //     from: {
-
-    //     }
-    // })
     return (
-        <div className={slide ? 'open-style' : 'close-style'} >
-            <span className='setting' onClick={moveSlide}>
+        <div style={slideStyle}>
+            <span className='span-elem' onClick={()=>setSlide(!slide)}>
                 <img src="/assets/images/icons/settings.png" alt="" />
             </span>
-            <span className='sounds-button'>
-                <img src={imgSoundOn} alt="" />
+            {slide &&
+            <span className='span-elem' onClick={soundToggle}>
+                <img src={sound} alt="" />
             </span>
+            }
         </div>
     )
 }

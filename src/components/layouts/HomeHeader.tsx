@@ -9,7 +9,9 @@ import { selectorCoins, selectorEnergy, selectorMaxScore, selectorUsername } fro
 // import { useSpring, animated } from "react-spring";
 
 const country = Countries.find(({code}) => code === 'am')
-    
+
+console.log("country", country)
+
 const sectStyle: React.CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between',
@@ -32,8 +34,9 @@ return (
                     text={username.toString()} 
                     className="avatar-desk" 
                     icon="/assets/images/avatars/abc-warriors-characters/black-blood.png"
+                    isPlusButton={false}
                     action={{
-                        actionIcon: country?.flag || "", 
+                        actionIcon: country?.code || "", 
                         onClickLeftIcon: () =>  setOpenAvatarMenu(!openAvatarMenu)
                     }}/>
             </div>
@@ -41,10 +44,12 @@ return (
                 <InfoDeskButton 
                     text={energy.toString()} 
                     icon="/assets/images/home/energy.png"
+                    isPlusButton={true}
                     action={{actionIcon: "/assets/images/home/plus.png", onClickRightIcon: (e)=> console.log(e)}}/>
                 <InfoDeskButton 
                     text={coins.toString()}
                     icon="/assets/images/home/coin.png"
+                    isPlusButton={true}
                     action={{actionIcon: "/assets/images/home/plus.png", onClickRightIcon: (e)=>console.log(e)}}/>
             </div>
         </section>

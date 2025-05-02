@@ -43,8 +43,8 @@ export const userSlice = createSlice({
         incrementCoins: (state, action: PayloadAction<number>) =>{
             state.userItems.coins += action.payload;
         },
-        toggleSounds: (state) => {
-            state.settings.sounds = !(state.settings.sounds)
+        toggleSounds: (state, action: PayloadAction<boolean>) => {
+            state.settings.sounds = action.payload
         }
     },
   })

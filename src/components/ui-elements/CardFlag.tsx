@@ -2,20 +2,20 @@ import '../../style/CardFlag.css'
 import { MouseEvent } from "react";
 import { ICountry } from "../../constants/countries";
 
+
 export type ICardFlag = {
     country: {className: string} & ICountry,
     clickCallback: (
-        countryCode: ICountry['countryName'],
+        countryCode: ICountry['name'],
         ev: MouseEvent<HTMLElement>
     ) => void,
 }
 
-export const CardFlag = ({country: {flag, countryName, className}, clickCallback}:ICardFlag)=>{
+export const CardFlag = ({country: {name, className, code}, clickCallback,}:ICardFlag)=>{
+    const iconClassname = `fi fi-${code}`;
     return (
-        <div className={'main-card '.concat(className)} onClick={(ev) => clickCallback(countryName, ev)}>
-            <span>
-                <img src={flag} />
-            </span>
+        <div className={'main-card '} onClick={(ev) => clickCallback(name, ev)}>
+            <span className={iconClassname.concat(' ', className)} style={{fontSize: "10rem"}}></span>
         </div>
     )
 }

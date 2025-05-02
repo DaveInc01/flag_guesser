@@ -9,7 +9,7 @@ import { PlayTimer } from "../ui-elements/PlayTimer";
 import { ButtonIcon } from "../ui-elements/ButtonIcon";
 import { GameConfig } from "../../constants/game-config";
 import { CSSProperties, useEffect, useState } from "react";
-import  { ICountry, Countries } from "../../constants/countries";
+import { ICountry, Countries } from "../../constants/countries";
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { decrementEnergy, incrementCoins, incrementMaxScore } from '../../features/user/userSlice';
 import { selectorEnergy, selectorMaxScore } from '../../features/user/userSelector';
@@ -34,22 +34,22 @@ const noneDesk:CSSProperties = {
     boxShadow: '#1e384a 0px 0px!important'
 }
 
-function removeSolives(countries: ICardFlag['country'][], solvedCountryNames: ICountry['countryName'][]): ICardFlag['country'][]{
-    return countries.filter(({countryName}) => !solvedCountryNames.includes(countryName));
+function removeSolves(countries: ICardFlag['country'][], solvedCountryNames: ICountry['name'][]): ICardFlag['country'][]{
+    return countries.filter(({name}) => !solvedCountryNames.includes(name));
 }
 
 function makeFourCountries(
     countries: ICardFlag['country'][], 
-    solvedCountryNames: ICountry['countryName'][]
+    solvedCountryNames: ICountry['name'][]
     ): ICardFlag['country'][] {
-    let filtred = shuffle(removeSolives(countries, solvedCountryNames));
+    let filtred = shuffle(removeSolves(countries, solvedCountryNames));
     let rand: number = random(0, filtred.length - 5);
 
     return filtred.slice(rand, rand + 4);
 }
 
-function makeRightCountryName(_countries: ICountry[]): ICountry['countryName']{
-    return _countries[random(0, _countries.length - 1)]?.countryName || '';
+function makeRightCountryName(_countries: ICountry[]): ICountry['name']{
+    return _countries[random(0, _countries.length - 1)]?.name || '';
 }
 
 function getCountriesWithEmptyClassess(countries: ICountry[]):ICardFlag['country'][] {
@@ -63,17 +63,18 @@ export const PlayPage = () => {
     const navigate = useNavigate();
     const maxScore = useAppSelector(selectorMaxScore)
     const sounds = useAppSelector(selectorSounds)
-    var   timerSound = new Audio(ISounds._time)
+    const   timerSound = new Audio(ISounds._time)
     const [lose, setLose] = useState<boolean>(false)
     const [disableEvent, setDisableEvent] = useState<boolean>(false);
+    const [runEffect, setRunEffect] = useState<boolean>(false);
     const [time, setTime] = useState<number>(GameConfig.parameters.time)
     const [score, setScore] = useState<number>(GameConfig.parameters.score)
 
     const [hearts, setHearts] = useState<number>(GameConfig.parameters.hearts);
     const [fourCountries, setFourCountries] = useState<ICardFlag['country'][]>(makeFourCountries(getCountriesWithEmptyClassess(Countries), []));
-    const [rightCountryName, setRightCountryName] = useState<ICountry['countryName']>(makeRightCountryName(fourCountries));
-    const [solvedCountryNames, setSolvedCountryNames] = useState<ICountry['countryName'][]>([]);
-    const [selectedCountryName, setSelectedCountryName] = useState<ICountry['countryName']>('');
+    const [rightCountryName, setRightCountryName] = useState<ICountry['name']>(makeRightCountryName(fourCountries));
+    const [solvedCountryNames, setSolvedCountryNames] = useState<ICountry['name'][]>([]);
+    const [selectedCountryName, setSelectedCountryName] = useState<ICountry['name']>('');
     
     const stopSound = (audio:HTMLAudioElement)=>{
         audio.pause()
@@ -105,7 +106,7 @@ export const PlayPage = () => {
     const onTimerStart = () => {
         timeoutTime = setTimeout(() => {
             if(timeoutTime) clearTimeout(timeoutTime); 
-            if(time && !lose) setTime(time-1)
+            if(time && !lose) setTime(time => time - 1);
             if(!time && !lose) onTimeIsUp();
         }, 1000)
     }
@@ -113,7 +114,11 @@ export const PlayPage = () => {
     const onTimerRestart = () => {
         clearTimeout(timeoutTime)
         setTimeout(()=>{
-            setTime(GameConfig.parameters.time);
+            if (time != GameConfig.parameters.time)
+                setTime(GameConfig.parameters.time)
+            else
+                setRunEffect(!runEffect)
+            nextQuestion();
         }, 2000)
     }
 
@@ -133,9 +138,11 @@ export const PlayPage = () => {
         })
     }
     
-    const onSelect = (selectedCountryName: ICountry['countryName']) => {
-        if(!lose) onTimerRestart();
-        if(lose) onTimerClear();
+    const onSelect = (selectedCountryName: ICountry['name']) => {
+        if(!lose) 
+            onTimerRestart();
+        if(lose) 
+            onTimerClear();
         setSelectedCountryName(selectedCountryName);
 
         setDisableEvent(true)
@@ -156,15 +163,10 @@ export const PlayPage = () => {
         } 
 
         setFourCountries(fourCountries.map(c => {
-            if(c.countryName === rightCountryName) return {...c, className: 'card-success'}
-            if(selectedCountryName === c.countryName && !isCorrectAnswer) return {...c, className: 'card-danger'}
+            if(c.name === rightCountryName) return {...c, className: 'card-success'}
+            if(selectedCountryName === c.name && !isCorrectAnswer) return {...c, className: 'card-danger'}
             return c;
         }));
-
-        var timeout = setTimeout(() => {
-            if (timeout) clearTimeout(timeout);
-            nextQuestion();
-        }, GameConfig.timout.rightAnswer);
     }
 
     useEffect(() => {
@@ -176,13 +178,18 @@ export const PlayPage = () => {
     }, [hearts]);
 
     useEffect(() => {
-        if (time === 3)
-            timerSound.play()
-        if(!lose) {
-            onTimerStart();
+        if (time === 3){
+            if(sounds)
+                timerSound.play().catch(e => console.log(e))
         }
-        if(lose) onTimerClear();
-    }, [time]);
+        if(!lose)
+            onTimerStart();
+        if(lose)
+            onTimerClear();
+        return () => {
+            if (timeoutTime) clearTimeout(timeoutTime);
+        }
+    }, [time, runEffect]);
 
     const backBtnClick = ()=>{
         stopSound(timerSound)
@@ -199,16 +206,17 @@ return (
                     <InfoDeskButton 
                         text={energy.toString()} 
                         icon="/assets/images/home/energy.png"
+                        isPlusButton={false}
                         noneDesk={true} 
                     />
-                    <Hearts maxCount={3} count={hearts}/>
+                    <Hearts maxCount={5} count={hearts}/>
                 </div>
             </header>
             <PlayContent
                 style={{pointerEvents:disableEvent || lose ?'none':'all'}} 
                 score={score}
                 rightCountryName={rightCountryName} 
-                onSelect={(cName: ICountry['countryName']) => onSelect(cName)} 
+                onSelect={(cName: ICountry['name']) => onSelect(cName)} 
                 onSetScore={() => {}}
                 onTimeUp={() => {}}
                 countries={fourCountries}/>
