@@ -8,7 +8,7 @@ import { PlayContent } from "../layouts/PlayContent";
 import { PlayTimer } from "../ui-elements/PlayTimer";
 import { ButtonIcon } from "../ui-elements/ButtonIcon";
 import { GameConfig } from "../../constants/game-config";
-import { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState, useRef } from "react";
 import { ICountry, Countries } from "../../constants/countries";
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { decrementEnergy, incrementCoins, incrementMaxScore } from '../../features/user/userSlice';
@@ -67,15 +67,16 @@ export const PlayPage = () => {
     const [lose, setLose] = useState<boolean>(false)
     const [disableEvent, setDisableEvent] = useState<boolean>(false);
     const [runEffect, setRunEffect] = useState<boolean>(false);
+    const [question, setQuestion] = useState<boolean>(false);
     const [time, setTime] = useState<number>(GameConfig.parameters.time)
     const [score, setScore] = useState<number>(GameConfig.parameters.score)
-
+    
     const [hearts, setHearts] = useState<number>(GameConfig.parameters.hearts);
     const [fourCountries, setFourCountries] = useState<ICardFlag['country'][]>(makeFourCountries(getCountriesWithEmptyClassess(Countries), []));
     const [rightCountryName, setRightCountryName] = useState<ICountry['name']>(makeRightCountryName(fourCountries));
     const [solvedCountryNames, setSolvedCountryNames] = useState<ICountry['name'][]>([]);
     const [selectedCountryName, setSelectedCountryName] = useState<ICountry['name']>('');
-    
+    let isCorrectAnswer:boolean
     const stopSound = (audio:HTMLAudioElement)=>{
         audio.pause()
         audio.currentTime = 0;
@@ -111,17 +112,9 @@ export const PlayPage = () => {
         }, 1000)
     }
 
-    const onTimerRestart = () => {
-        if(timeoutTime) clearTimeout(timeoutTime)
-        timeoutTime = setTimeout(()=>{
-            if (time != GameConfig.parameters.time)
-                setTime(GameConfig.parameters.time)
-            else
-                setRunEffect(!runEffect)
-            if(hearts)
-                nextQuestion();
-        }, 2000)
-    }
+    // const onTimerRestart = () => {
+        
+    // }
 
     const onTimerClear = () => {
         clearTimeout(timeoutTime)
@@ -136,54 +129,81 @@ export const PlayPage = () => {
                 if (hearts) {
                     setHearts(hearts => hearts - 1)
                 }
-                if(hearts)
-                    nextQuestion();
+                // if(hearts)
+                //     nextQuestion();
             }
         })
     }
     
     const onSelect = (selectedCountryName: ICountry['name']) => {
-        if(!lose) 
-            onTimerRestart();
+        // if(!lose) 
+        //     onTimerRestart();
         if(lose) 
             onTimerClear();
         setSelectedCountryName(selectedCountryName);
 
         setDisableEvent(true)
 
-        const isCorrectAnswer =  selectedCountryName === rightCountryName;
+        isCorrectAnswer =  selectedCountryName === rightCountryName;
 
         if (isCorrectAnswer){
             stopSound(timerSound)
             playSound(ISounds.correct, sounds).then(()=>{
                 setScore(score => score + 1)
             })
+            setQuestion(!question)
         } 
-        if (!isCorrectAnswer && hearts){
+        else{
             stopSound(timerSound)
             playSound(ISounds.wrong, sounds).then(()=>{
-                // setHearts(hearts - 1);
                 console.log("hearts before", hearts)
                 setHearts(hearts => hearts - 1);
                 console.log("hearts after", hearts)
             })
         } 
-        if(hearts){
-            setFourCountries(fourCountries.map(c => {
-                if(c.name === rightCountryName) return {...c, className: 'card-success'}
-                if(selectedCountryName === c.name && !isCorrectAnswer) return {...c, className: 'card-danger'}
-                return c;
-            }));
-        }
+        // if(hearts){
+        //     setFourCountries(fourCountries.map(c => {
+        //         if(c.name === rightCountryName) return {...c, className: 'card-success'}
+        //         if(selectedCountryName === c.name && !isCorrectAnswer) return {...c, className: 'card-danger'}
+        //         return c;
+        //     }));
+        // }
     }
 
+    const renderCount = useRef(0);
+
     useEffect(() => {
+        // skip first two renders after useState -> hearts, question
+        if(renderCount.current < 2)
+        {
+            renderCount.current += 1
+            return
+        }
+        console.log("hearts - ", hearts)
         if(!hearts) {
             setLose(true);
             if(score > maxScore) dispatch(incrementMaxScore(score))
             dispatch(incrementCoins(score * 5))
         }
-    }, [hearts]);
+        else
+        {
+            if(timeoutTime) clearTimeout(timeoutTime)
+                timeoutTime = setTimeout(()=>{
+                    if (time != GameConfig.parameters.time)
+                        setTime(GameConfig.parameters.time)
+                    else
+                        setRunEffect(!runEffect)
+                    if(hearts)
+                        nextQuestion();
+                    setFourCountries(fourCountries.map(c => {
+                        if(c.name === rightCountryName) return {...c, className: 'card-success'}
+                        if(selectedCountryName === c.name && !isCorrectAnswer) return {...c, className: 'card-danger'}
+                        return c;
+                    }));
+                    nextQuestion();
+                }, 2000)
+        }
+    }, [hearts, question]);
 
     useEffect(() => {
         if (time === 3)

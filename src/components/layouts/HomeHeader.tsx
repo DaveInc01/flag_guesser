@@ -10,8 +10,6 @@ import { selectorCoins, selectorEnergy, selectorMaxScore, selectorUsername } fro
 
 const country = Countries.find(({code}) => code === 'am')
 
-console.log("country", country)
-
 const sectStyle: React.CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between',

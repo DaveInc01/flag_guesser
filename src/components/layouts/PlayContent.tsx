@@ -21,9 +21,9 @@ export type IPlayContent = {
 };
 
 export const PlayContent = ({
-    score, 
-    style, 
-    countries, 
+    score,
+    style,
+    countries,
     rightCountryName,
     onSelect
 }: IPlayContent)=> {
@@ -36,7 +36,7 @@ return (
                 <CardFlag
                     key={key}
                     country={country} 
-                    clickCallback={(countryName, ev) => onSelect(countryName)}  />)}
+                    clickCallback={(countryName, ev) => onSelect(countryName)} />)}
         </div>
     </div>  
 )}
