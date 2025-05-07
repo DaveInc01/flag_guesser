@@ -15,7 +15,8 @@ export const CardFlag = ({country: {name, className, code}, clickCallback,}:ICar
     const iconClassname = `fi fi-${code}`;
     return (
         <div className={'main-card '} onClick={(ev) => clickCallback(name, ev)}>
-            <span className={iconClassname.concat(' ', className)} style={{fontSize: "10rem"}}></span>
+            <span className={iconClassname.concat(' ', className)} ></span>
         </div>
     )
 }
+// style={{fontSize: "10rem"}}

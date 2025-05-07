@@ -12,10 +12,18 @@
     padding: 0 20px;
     user-select: none;
 } */
-.main-card span {
+
+@media (max-width: 768px) {
+    .main-card > span {
+        font-size: 20vw!important;
+    }
+}
+
+.main-card > span {
     margin: auto;
     cursor: pointer;
-    padding: 0 20px;
+    font-size: 11vw;
+    /* padding: 0 20px; */
     user-select: none;
     border: 3px solid transparent;
     display: block;

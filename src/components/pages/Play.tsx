@@ -112,13 +112,14 @@ export const PlayPage = () => {
     }
 
     const onTimerRestart = () => {
-        clearTimeout(timeoutTime)
-        setTimeout(()=>{
+        if(timeoutTime) clearTimeout(timeoutTime)
+        timeoutTime = setTimeout(()=>{
             if (time != GameConfig.parameters.time)
                 setTime(GameConfig.parameters.time)
             else
                 setRunEffect(!runEffect)
-            nextQuestion();
+            if(hearts)
+                nextQuestion();
         }, 2000)
     }
 
@@ -132,8 +133,11 @@ export const PlayPage = () => {
         playSound(ISounds.wrong, sounds).then(()=>{
             if(!lose){
                 setTime(GameConfig.parameters.time);
-                if (hearts) setHearts(hearts - 1)
-                nextQuestion();
+                if (hearts) {
+                    setHearts(hearts => hearts - 1)
+                }
+                if(hearts)
+                    nextQuestion();
             }
         })
     }
@@ -152,21 +156,25 @@ export const PlayPage = () => {
         if (isCorrectAnswer){
             stopSound(timerSound)
             playSound(ISounds.correct, sounds).then(()=>{
-                setScore(score + 1)
+                setScore(score => score + 1)
             })
         } 
         if (!isCorrectAnswer && hearts){
             stopSound(timerSound)
             playSound(ISounds.wrong, sounds).then(()=>{
-                setHearts(hearts - 1);
+                // setHearts(hearts - 1);
+                console.log("hearts before", hearts)
+                setHearts(hearts => hearts - 1);
+                console.log("hearts after", hearts)
             })
         } 
-
-        setFourCountries(fourCountries.map(c => {
-            if(c.name === rightCountryName) return {...c, className: 'card-success'}
-            if(selectedCountryName === c.name && !isCorrectAnswer) return {...c, className: 'card-danger'}
-            return c;
-        }));
+        if(hearts){
+            setFourCountries(fourCountries.map(c => {
+                if(c.name === rightCountryName) return {...c, className: 'card-success'}
+                if(selectedCountryName === c.name && !isCorrectAnswer) return {...c, className: 'card-danger'}
+                return c;
+            }));
+        }
     }
 
     useEffect(() => {
@@ -178,10 +186,9 @@ export const PlayPage = () => {
     }, [hearts]);
 
     useEffect(() => {
-        if (time === 3){
+        if (time === 3)
             if(sounds)
                 timerSound.play().catch(e => console.log(e))
-        }
         if(!lose)
             onTimerStart();
         if(lose)
@@ -209,7 +216,7 @@ return (
                         isPlusButton={false}
                         noneDesk={true} 
                     />
-                    <Hearts maxCount={5} count={hearts}/>
+                    <Hearts maxCount={3} count={hearts}/>
                 </div>
             </header>
             <PlayContent
