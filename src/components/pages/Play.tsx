@@ -70,13 +70,14 @@ export const PlayPage = () => {
     const [question, setQuestion] = useState<boolean>(false);
     const [time, setTime] = useState<number>(GameConfig.parameters.time)
     const [score, setScore] = useState<number>(GameConfig.parameters.score)
-    
+    const [pauseTimer, setPauseTimer] = useState<boolean>(false)
     const [hearts, setHearts] = useState<number>(GameConfig.parameters.hearts);
     const [fourCountries, setFourCountries] = useState<ICardFlag['country'][]>(makeFourCountries(getCountriesWithEmptyClassess(Countries), []));
     const [rightCountryName, setRightCountryName] = useState<ICountry['name']>(makeRightCountryName(fourCountries));
     const [solvedCountryNames, setSolvedCountryNames] = useState<ICountry['name'][]>([]);
     const [selectedCountryName, setSelectedCountryName] = useState<ICountry['name']>('');
     let isCorrectAnswer:boolean
+
     const stopSound = (audio:HTMLAudioElement)=>{
         audio.pause()
         audio.currentTime = 0;
@@ -161,13 +162,13 @@ export const PlayPage = () => {
                 console.log("hearts after", hearts)
             })
         } 
-        // if(hearts){
-        //     setFourCountries(fourCountries.map(c => {
-        //         if(c.name === rightCountryName) return {...c, className: 'card-success'}
-        //         if(selectedCountryName === c.name && !isCorrectAnswer) return {...c, className: 'card-danger'}
-        //         return c;
-        //     }));
-        // }
+        if(hearts){
+            setFourCountries(fourCountries.map(c => {
+                if(c.name === rightCountryName) return {...c, className: 'card-success'}
+                if(selectedCountryName === c.name && !isCorrectAnswer) return {...c, className: 'card-danger'}
+                return c;
+            }));
+        }
     }
 
     const renderCount = useRef(0);
@@ -188,6 +189,7 @@ export const PlayPage = () => {
         else
         {
             if(timeoutTime) clearTimeout(timeoutTime)
+                setPauseTimer(true)
                 timeoutTime = setTimeout(()=>{
                     if (time != GameConfig.parameters.time)
                         setTime(GameConfig.parameters.time)
@@ -200,7 +202,8 @@ export const PlayPage = () => {
                         if(selectedCountryName === c.name && !isCorrectAnswer) return {...c, className: 'card-danger'}
                         return c;
                     }));
-                    nextQuestion();
+                    setPauseTimer(false)
+                    // nextQuestion();
                 }, 2000)
         }
     }, [hearts, question]);
@@ -209,14 +212,14 @@ export const PlayPage = () => {
         if (time === 3)
             if(sounds)
                 timerSound.play().catch(e => console.log(e))
-        if(!lose)
-            onTimerStart();
+        // if(!lose && !pauseTimer)
+        //     onTimerStart();
         if(lose)
             onTimerClear();
         return () => {
             if (timeoutTime) clearTimeout(timeoutTime);
         }
-    }, [time, runEffect]);
+    }, [time, runEffect, pauseTimer]);
 
     const backBtnClick = ()=>{
         stopSound(timerSound)
