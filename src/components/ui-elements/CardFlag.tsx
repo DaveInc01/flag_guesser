@@ -26,6 +26,8 @@ export const CardFlag = ({country: {name, className, code}, clickCallback,}:ICar
     return (
         <div className={'main-card '} onClick={(ev) => {
             setFlipped(flipped => !flipped)
+            // card back flip after timeout
+            setTimeout(()=>{setFlipped(flipped => !flipped)}, 1500)
             return clickCallback(name, ev)
         }}>
             <a.div

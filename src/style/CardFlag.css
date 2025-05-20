@@ -31,6 +31,7 @@
 /* spring css */
 
 .c {
+    display: inline-block;
     font-size: 200px;
     position: absolute;
     max-width: 200px;
@@ -38,6 +39,7 @@
     width: 200px;
     height: 150px;
     cursor: pointer;
+    border: 3px solid transparent;
     will-change: transform, opacity;
   }
   

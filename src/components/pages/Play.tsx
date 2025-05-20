@@ -130,8 +130,8 @@ export const PlayPage = () => {
                 if (hearts) {
                     setHearts(hearts => hearts - 1)
                 }
-                // if(hearts)
-                //     nextQuestion();
+                if(hearts)
+                    nextQuestion();
             }
         })
     }
@@ -139,8 +139,8 @@ export const PlayPage = () => {
     const onSelect = (selectedCountryName: ICountry['name']) => {
         // if(!lose) 
         //     onTimerRestart();
-        if(lose) 
-            onTimerClear();
+        // if(lose) 
+        //     onTimerClear();
         setSelectedCountryName(selectedCountryName);
 
         setDisableEvent(true)
@@ -203,7 +203,7 @@ export const PlayPage = () => {
                         return c;
                     }));
                     setPauseTimer(false)
-                    // nextQuestion();
+                    nextQuestion();
                 }, 2000)
         }
     }, [hearts, question]);

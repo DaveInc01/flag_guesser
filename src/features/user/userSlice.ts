@@ -17,7 +17,7 @@ const initialState:IUser = {
         maxScore: 0,
     },
     settings:{
-        sounds: true
+        sounds: false
     }
 };
 
