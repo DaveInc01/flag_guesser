@@ -15,8 +15,7 @@ export type ICardFlag = {
 
 export const CardFlag = ({country: {name, className, code}, clickCallback,}:ICardFlag)=>{
     const iconClassname = `fi fi-${code}`
-    const flipImageUrl = `${process.env.PUBLIC_URL}/assets/images/each_country/${toLower(name)}.1.jpg`;
-    console.log("flipImage ", flipImageUrl)
+    const flipImageUrl = `${process.env.PUBLIC_URL}/assets/images/each_country/${name.toLocaleLowerCase().replace(/ /g, '')}.1.jpg`;
     const [flipped, setFlipped] = useState(false)
     const { transform, opacity } = useSpring({
         opacity: flipped ? 1 : 0,

@@ -6,10 +6,12 @@ import { LoginPage } from '../components/pages/Login'
 import { paths } from '../constants/paths'
 import { HomePage } from '../components/pages/Home'
 import { PlayPage } from '../components/pages/Play'
+import {MultiPlayerPage} from '../components/pages/Multiplayer'
 
 export const Routes:IRoute[] = [
     {component: PlayPage,     url: paths.Play,     title: 'play'},
     {component: HomePage,     url: paths.Home,     title: 'home'},
     {component: RegisterPage, url: paths.Register, title: 'register'},
     {component: LoginPage,    url: paths.Login,    title: 'login'},
+    {component: MultiPlayerPage, url: paths.Multiplayer, title: 'multiplayer'}
 ]

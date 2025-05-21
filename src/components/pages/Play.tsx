@@ -20,7 +20,7 @@ import { ISounds } from '../../constants/media';
 import { useNavigate } from 'react-router-dom';
 
 const headerStyle:CSSProperties = {
-    display:'flex', 
+    display:'flex',
     paddingTop: '20px',
     marginLeft: '10px',
     marginRight: '10px',
@@ -63,7 +63,7 @@ export const PlayPage = () => {
     const navigate = useNavigate();
     const maxScore = useAppSelector(selectorMaxScore)
     const sounds = useAppSelector(selectorSounds)
-    const   timerSound = new Audio(ISounds._time)
+    const timerSound = new Audio(ISounds._time)
     const [lose, setLose] = useState<boolean>(false)
     const [disableEvent, setDisableEvent] = useState<boolean>(false);
     const [runEffect, setRunEffect] = useState<boolean>(false);
@@ -76,7 +76,7 @@ export const PlayPage = () => {
     const [rightCountryName, setRightCountryName] = useState<ICountry['name']>(makeRightCountryName(fourCountries));
     const [solvedCountryNames, setSolvedCountryNames] = useState<ICountry['name'][]>([]);
     const [selectedCountryName, setSelectedCountryName] = useState<ICountry['name']>('');
-    let isCorrectAnswer:boolean
+    const [isCorrectAnswer, setAnswer] = useState<boolean>(false)
 
     const stopSound = (audio:HTMLAudioElement)=>{
         audio.pause()
@@ -113,10 +113,6 @@ export const PlayPage = () => {
         }, 1000)
     }
 
-    // const onTimerRestart = () => {
-        
-    // }
-
     const onTimerClear = () => {
         clearTimeout(timeoutTime)
         setTime(0);
@@ -137,17 +133,15 @@ export const PlayPage = () => {
     }
     
     const onSelect = (selectedCountryName: ICountry['name']) => {
-        // if(!lose) 
-        //     onTimerRestart();
-        // if(lose) 
-        //     onTimerClear();
+
         setSelectedCountryName(selectedCountryName);
 
         setDisableEvent(true)
 
-        isCorrectAnswer =  selectedCountryName === rightCountryName;
+        let answer =  selectedCountryName === rightCountryName;
+        setAnswer(answer)
 
-        if (isCorrectAnswer){
+        if (answer){
             stopSound(timerSound)
             playSound(ISounds.correct, sounds).then(()=>{
                 setScore(score => score + 1)
@@ -165,7 +159,7 @@ export const PlayPage = () => {
         if(hearts){
             setFourCountries(fourCountries.map(c => {
                 if(c.name === rightCountryName) return {...c, className: 'card-success'}
-                if(selectedCountryName === c.name && !isCorrectAnswer) return {...c, className: 'card-danger'}
+                if(selectedCountryName === c.name && !answer) return {...c, className: 'card-danger'}
                 return c;
             }));
         }

@@ -19,15 +19,6 @@ export const Countries:ICountry[] = [
 	  "name": "Afghanistan"
 	},
 	{
-	  "capital": "Mariehamn",
-	  "code": "ax",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/ax.svg",
-	  "flag_4x3": "flags/4x3/ax.svg",
-	  "iso": true,
-	  "name": "Aland Islands"
-	},
-	{
 	  "capital": "Tirana",
 	  "code": "al",
 	  "continent": "Europe",
@@ -44,15 +35,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/dz.svg",
 	  "iso": true,
 	  "name": "Algeria"
-	},
-	{
-	  "capital": "Pago Pago",
-	  "code": "as",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/as.svg",
-	  "flag_4x3": "flags/4x3/as.svg",
-	  "iso": true,
-	  "name": "American Samoa"
 	},
 	{
 	  "capital": "Andorra la Vella",
@@ -73,31 +55,6 @@ export const Countries:ICountry[] = [
 	  "name": "Angola"
 	},
 	{
-	  "capital": "The Valley",
-	  "code": "ai",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/ai.svg",
-	  "flag_4x3": "flags/4x3/ai.svg",
-	  "iso": true,
-	  "name": "Anguilla"
-	},
-	{
-	  "code": "aq",
-	  "flag_1x1": "flags/1x1/aq.svg",
-	  "flag_4x3": "flags/4x3/aq.svg",
-	  "iso": true,
-	  "name": "Antarctica"
-	},
-	{
-	  "capital": "St. John's",
-	  "code": "ag",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/ag.svg",
-	  "flag_4x3": "flags/4x3/ag.svg",
-	  "iso": true,
-	  "name": "Antigua and Barbuda"
-	},
-	{
 	  "capital": "Buenos Aires",
 	  "code": "ar",
 	  "continent": "South America",
@@ -114,31 +71,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/am.svg",
 	  "iso": true,
 	  "name": "Armenia"
-	},
-	{
-	  "capital": "Oranjestad",
-	  "code": "aw",
-	  "continent": "South America",
-	  "flag_1x1": "flags/1x1/aw.svg",
-	  "flag_4x3": "flags/4x3/aw.svg",
-	  "iso": true,
-	  "name": "Aruba"
-	},
-	{
-	  "capital": "Georgetown",
-	  "code": "sh-ac",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/sh-ac.svg",
-	  "flag_4x3": "flags/4x3/sh-ac.svg",
-	  "iso": false,
-	  "name": "Ascension Island"
-	},
-	{
-	  "code": "asean",
-	  "flag_1x1": "flags/1x1/asean.svg",
-	  "flag_4x3": "flags/4x3/asean.svg",
-	  "iso": false,
-	  "name": "Association of Southeast Asian Nations"
 	},
 	{
 	  "capital": "Canberra",
@@ -204,13 +136,6 @@ export const Countries:ICountry[] = [
 	  "name": "Barbados"
 	},
 	{
-	  "code": "es-pv",
-	  "flag_1x1": "flags/1x1/es-pv.svg",
-	  "flag_4x3": "flags/4x3/es-pv.svg",
-	  "iso": false,
-	  "name": "Basque Country"
-	},
-	{
 	  "capital": "Minsk",
 	  "code": "by",
 	  "continent": "Europe",
@@ -247,15 +172,6 @@ export const Countries:ICountry[] = [
 	  "name": "Benin"
 	},
 	{
-	  "capital": "Hamilton",
-	  "code": "bm",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/bm.svg",
-	  "flag_4x3": "flags/4x3/bm.svg",
-	  "iso": true,
-	  "name": "Bermuda"
-	},
-	{
 	  "capital": "Thimphu",
 	  "code": "bt",
 	  "continent": "Asia",
@@ -272,15 +188,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/bo.svg",
 	  "iso": true,
 	  "name": "Bolivia"
-	},
-	{
-	  "capital": "Kralendijk",
-	  "code": "bq",
-	  "continent": "South America",
-	  "flag_1x1": "flags/1x1/bq.svg",
-	  "flag_4x3": "flags/4x3/bq.svg",
-	  "iso": true,
-	  "name": "Bonaire, Sint Eustatius and Saba"
 	},
 	{
 	  "capital": "Sarajevo",
@@ -301,13 +208,6 @@ export const Countries:ICountry[] = [
 	  "name": "Botswana"
 	},
 	{
-	  "code": "bv",
-	  "flag_1x1": "flags/1x1/bv.svg",
-	  "flag_4x3": "flags/4x3/bv.svg",
-	  "iso": true,
-	  "name": "Bouvet Island"
-	},
-	{
 	  "capital": "Brasília",
 	  "code": "br",
 	  "continent": "South America",
@@ -315,15 +215,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/br.svg",
 	  "iso": true,
 	  "name": "Brazil"
-	},
-	{
-	  "capital": "Diego Garcia",
-	  "code": "io",
-	  "continent": "Asia",
-	  "flag_1x1": "flags/1x1/io.svg",
-	  "flag_4x3": "flags/4x3/io.svg",
-	  "iso": true,
-	  "name": "British Indian Ocean Territory"
 	},
 	{
 	  "capital": "Bandar Seri Begawan",
@@ -398,29 +289,6 @@ export const Countries:ICountry[] = [
 	  "name": "Canada"
 	},
 	{
-	  "code": "ic",
-	  "flag_1x1": "flags/1x1/ic.svg",
-	  "flag_4x3": "flags/4x3/ic.svg",
-	  "iso": false,
-	  "name": "Canary Islands"
-	},
-	{
-	  "code": "es-ct",
-	  "flag_1x1": "flags/1x1/es-ct.svg",
-	  "flag_4x3": "flags/4x3/es-ct.svg",
-	  "iso": false,
-	  "name": "Catalonia"
-	},
-	{
-	  "capital": "George Town",
-	  "code": "ky",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/ky.svg",
-	  "flag_4x3": "flags/4x3/ky.svg",
-	  "iso": true,
-	  "name": "Cayman Islands"
-	},
-	{
 	  "capital": "Bangui",
 	  "code": "cf",
 	  "continent": "Africa",
@@ -428,13 +296,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/cf.svg",
 	  "iso": true,
 	  "name": "Central African Republic"
-	},
-	{
-	  "code": "cefta",
-	  "flag_1x1": "flags/1x1/cefta.svg",
-	  "flag_4x3": "flags/4x3/cefta.svg",
-	  "iso": false,
-	  "name": "Central European Free Trade Agreement"
 	},
 	{
 	  "capital": "N'Djamena",
@@ -464,31 +325,6 @@ export const Countries:ICountry[] = [
 	  "name": "China"
 	},
 	{
-	  "capital": "Flying Fish Cove",
-	  "code": "cx",
-	  "continent": "Asia",
-	  "flag_1x1": "flags/1x1/cx.svg",
-	  "flag_4x3": "flags/4x3/cx.svg",
-	  "iso": true,
-	  "name": "Christmas Island"
-	},
-	{
-	  "code": "cp",
-	  "flag_1x1": "flags/1x1/cp.svg",
-	  "flag_4x3": "flags/4x3/cp.svg",
-	  "iso": false,
-	  "name": "Clipperton Island"
-	},
-	{
-	  "capital": "West Island",
-	  "code": "cc",
-	  "continent": "Asia",
-	  "flag_1x1": "flags/1x1/cc.svg",
-	  "flag_4x3": "flags/4x3/cc.svg",
-	  "iso": true,
-	  "name": "Cocos (Keeling) Islands"
-	},
-	{
 	  "capital": "Bogotá",
 	  "code": "co",
 	  "continent": "South America",
@@ -505,15 +341,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/km.svg",
 	  "iso": true,
 	  "name": "Comoros"
-	},
-	{
-	  "capital": "Avarua",
-	  "code": "ck",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/ck.svg",
-	  "flag_4x3": "flags/4x3/ck.svg",
-	  "iso": true,
-	  "name": "Cook Islands"
 	},
 	{
 	  "capital": "San José",
@@ -541,15 +368,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/cu.svg",
 	  "iso": true,
 	  "name": "Cuba"
-	},
-	{
-	  "capital": "Willemstad",
-	  "code": "cw",
-	  "continent": "South America",
-	  "flag_1x1": "flags/1x1/cw.svg",
-	  "flag_4x3": "flags/4x3/cw.svg",
-	  "iso": true,
-	  "name": "Curaçao"
 	},
 	{
 	  "capital": "Nicosia",
@@ -597,13 +415,6 @@ export const Countries:ICountry[] = [
 	  "name": "Denmark"
 	},
 	{
-	  "code": "dg",
-	  "flag_1x1": "flags/1x1/dg.svg",
-	  "flag_4x3": "flags/4x3/dg.svg",
-	  "iso": false,
-	  "name": "Diego Garcia"
-	},
-	{
 	  "capital": "Djibouti",
 	  "code": "dj",
 	  "continent": "Africa",
@@ -629,13 +440,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/do.svg",
 	  "iso": true,
 	  "name": "Dominican Republic"
-	},
-	{
-	  "code": "eac",
-	  "flag_1x1": "flags/1x1/eac.svg",
-	  "flag_4x3": "flags/4x3/eac.svg",
-	  "iso": false,
-	  "name": "East African Community"
 	},
 	{
 	  "capital": "Quito",
@@ -665,15 +469,6 @@ export const Countries:ICountry[] = [
 	  "name": "El Salvador"
 	},
 	{
-	  "capital": "London",
-	  "code": "gb-eng",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/gb-eng.svg",
-	  "flag_4x3": "flags/4x3/gb-eng.svg",
-	  "iso": false,
-	  "name": "England"
-	},
-	{
 	  "capital": "Malabo",
 	  "code": "gq",
 	  "continent": "Africa",
@@ -701,15 +496,6 @@ export const Countries:ICountry[] = [
 	  "name": "Estonia"
 	},
 	{
-	  "capital": "Lobamba, Mbabane",
-	  "code": "sz",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/sz.svg",
-	  "flag_4x3": "flags/4x3/sz.svg",
-	  "iso": true,
-	  "name": "Eswatini"
-	},
-	{
 	  "capital": "Addis Ababa",
 	  "code": "et",
 	  "continent": "Africa",
@@ -717,31 +503,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/et.svg",
 	  "iso": true,
 	  "name": "Ethiopia"
-	},
-	{
-	  "code": "eu",
-	  "flag_1x1": "flags/1x1/eu.svg",
-	  "flag_4x3": "flags/4x3/eu.svg",
-	  "iso": false,
-	  "name": "Europe"
-	},
-	{
-	  "capital": "Stanley",
-	  "code": "fk",
-	  "continent": "South America",
-	  "flag_1x1": "flags/1x1/fk.svg",
-	  "flag_4x3": "flags/4x3/fk.svg",
-	  "iso": true,
-	  "name": "Falkland Islands"
-	},
-	{
-	  "capital": "Tórshavn",
-	  "code": "fo",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/fo.svg",
-	  "flag_4x3": "flags/4x3/fo.svg",
-	  "iso": true,
-	  "name": "Faroe Islands"
 	},
 	{
 	  "capital": "Palikir",
@@ -780,33 +541,6 @@ export const Countries:ICountry[] = [
 	  "name": "France"
 	},
 	{
-	  "capital": "Cayenne",
-	  "code": "gf",
-	  "continent": "South America",
-	  "flag_1x1": "flags/1x1/gf.svg",
-	  "flag_4x3": "flags/4x3/gf.svg",
-	  "iso": true,
-	  "name": "French Guiana"
-	},
-	{
-	  "capital": "Papeete",
-	  "code": "pf",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/pf.svg",
-	  "flag_4x3": "flags/4x3/pf.svg",
-	  "iso": true,
-	  "name": "French Polynesia"
-	},
-	{
-	  "capital": "Saint-Pierre, Réunion",
-	  "code": "tf",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/tf.svg",
-	  "flag_4x3": "flags/4x3/tf.svg",
-	  "iso": true,
-	  "name": "French Southern Territories"
-	},
-	{
 	  "capital": "Libreville",
 	  "code": "ga",
 	  "continent": "Africa",
@@ -814,13 +548,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/ga.svg",
 	  "iso": true,
 	  "name": "Gabon"
-	},
-	{
-	  "code": "es-ga",
-	  "flag_1x1": "flags/1x1/es-ga.svg",
-	  "flag_4x3": "flags/4x3/es-ga.svg",
-	  "iso": false,
-	  "name": "Galicia"
 	},
 	{
 	  "capital": "Banjul",
@@ -859,15 +586,6 @@ export const Countries:ICountry[] = [
 	  "name": "Ghana"
 	},
 	{
-	  "capital": "Gibraltar",
-	  "code": "gi",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/gi.svg",
-	  "flag_4x3": "flags/4x3/gi.svg",
-	  "iso": true,
-	  "name": "Gibraltar"
-	},
-	{
 	  "capital": "Athens",
 	  "code": "gr",
 	  "continent": "Europe",
@@ -875,15 +593,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/gr.svg",
 	  "iso": true,
 	  "name": "Greece"
-	},
-	{
-	  "capital": "Nuuk",
-	  "code": "gl",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/gl.svg",
-	  "flag_4x3": "flags/4x3/gl.svg",
-	  "iso": true,
-	  "name": "Greenland"
 	},
 	{
 	  "capital": "St. George's",
@@ -895,24 +604,6 @@ export const Countries:ICountry[] = [
 	  "name": "Grenada"
 	},
 	{
-	  "capital": "Basse-Terre",
-	  "code": "gp",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/gp.svg",
-	  "flag_4x3": "flags/4x3/gp.svg",
-	  "iso": true,
-	  "name": "Guadeloupe"
-	},
-	{
-	  "capital": "Hagåtña",
-	  "code": "gu",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/gu.svg",
-	  "flag_4x3": "flags/4x3/gu.svg",
-	  "iso": true,
-	  "name": "Guam"
-	},
-	{
 	  "capital": "Guatemala City",
 	  "code": "gt",
 	  "continent": "North America",
@@ -922,15 +613,6 @@ export const Countries:ICountry[] = [
 	  "name": "Guatemala"
 	},
 	{
-	  "capital": "Saint Peter Port",
-	  "code": "gg",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/gg.svg",
-	  "flag_4x3": "flags/4x3/gg.svg",
-	  "iso": true,
-	  "name": "Guernsey"
-	},
-	{
 	  "capital": "Conakry",
 	  "code": "gn",
 	  "continent": "Africa",
@@ -938,15 +620,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/gn.svg",
 	  "iso": true,
 	  "name": "Guinea"
-	},
-	{
-	  "capital": "Bissau",
-	  "code": "gw",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/gw.svg",
-	  "flag_4x3": "flags/4x3/gw.svg",
-	  "iso": true,
-	  "name": "Guinea-Bissau"
 	},
 	{
 	  "capital": "Georgetown",
@@ -967,22 +640,6 @@ export const Countries:ICountry[] = [
 	  "name": "Haiti"
 	},
 	{
-	  "code": "hm",
-	  "flag_1x1": "flags/1x1/hm.svg",
-	  "flag_4x3": "flags/4x3/hm.svg",
-	  "iso": true,
-	  "name": "Heard Island and McDonald Islands"
-	},
-	{
-	  "capital": "Vatican City",
-	  "code": "va",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/va.svg",
-	  "flag_4x3": "flags/4x3/va.svg",
-	  "iso": true,
-	  "name": "Holy See"
-	},
-	{
 	  "capital": "Tegucigalpa",
 	  "code": "hn",
 	  "continent": "North America",
@@ -990,15 +647,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/hn.svg",
 	  "iso": true,
 	  "name": "Honduras"
-	},
-	{
-	  "capital": "Hong Kong",
-	  "code": "hk",
-	  "continent": "Asia",
-	  "flag_1x1": "flags/1x1/hk.svg",
-	  "flag_4x3": "flags/4x3/hk.svg",
-	  "iso": true,
-	  "name": "Hong Kong"
 	},
 	{
 	  "capital": "Budapest",
@@ -1064,15 +712,6 @@ export const Countries:ICountry[] = [
 	  "name": "Ireland"
 	},
 	{
-	  "capital": "Douglas",
-	  "code": "im",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/im.svg",
-	  "flag_4x3": "flags/4x3/im.svg",
-	  "iso": true,
-	  "name": "Isle of Man"
-	},
-	{
 	  "capital": "Jerusalem",
 	  "code": "il",
 	  "continent": "Asia",
@@ -1107,15 +746,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/jp.svg",
 	  "iso": true,
 	  "name": "Japan"
-	},
-	{
-	  "capital": "Saint Helier",
-	  "code": "je",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/je.svg",
-	  "flag_4x3": "flags/4x3/je.svg",
-	  "iso": true,
-	  "name": "Jersey"
 	},
 	{
 	  "capital": "Amman",
@@ -1199,13 +829,6 @@ export const Countries:ICountry[] = [
 	  "name": "Latvia"
 	},
 	{
-	  "code": "arab",
-	  "flag_1x1": "flags/1x1/arab.svg",
-	  "flag_4x3": "flags/4x3/arab.svg",
-	  "iso": false,
-	  "name": "League of Arab States"
-	},
-	{
 	  "capital": "Beirut",
 	  "code": "lb",
 	  "continent": "Asia",
@@ -1267,15 +890,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/lu.svg",
 	  "iso": true,
 	  "name": "Luxembourg"
-	},
-	{
-	  "capital": "Macau",
-	  "code": "mo",
-	  "continent": "Asia",
-	  "flag_1x1": "flags/1x1/mo.svg",
-	  "flag_4x3": "flags/4x3/mo.svg",
-	  "iso": true,
-	  "name": "Macau"
 	},
 	{
 	  "capital": "Antananarivo",
@@ -1341,15 +955,6 @@ export const Countries:ICountry[] = [
 	  "name": "Marshall Islands"
 	},
 	{
-	  "capital": "Fort-de-France",
-	  "code": "mq",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/mq.svg",
-	  "flag_4x3": "flags/4x3/mq.svg",
-	  "iso": true,
-	  "name": "Martinique"
-	},
-	{
 	  "capital": "Nouakchott",
 	  "code": "mr",
 	  "continent": "Africa",
@@ -1366,15 +971,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/mu.svg",
 	  "iso": true,
 	  "name": "Mauritius"
-	},
-	{
-	  "capital": "Mamoudzou",
-	  "code": "yt",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/yt.svg",
-	  "flag_4x3": "flags/4x3/yt.svg",
-	  "iso": true,
-	  "name": "Mayotte"
 	},
 	{
 	  "capital": "Mexico City",
@@ -1420,15 +1016,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/me.svg",
 	  "iso": true,
 	  "name": "Montenegro"
-	},
-	{
-	  "capital": "Little Bay, Brades, Plymouth",
-	  "code": "ms",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/ms.svg",
-	  "flag_4x3": "flags/4x3/ms.svg",
-	  "iso": true,
-	  "name": "Montserrat"
 	},
 	{
 	  "capital": "Rabat",
@@ -1494,15 +1081,6 @@ export const Countries:ICountry[] = [
 	  "name": "Netherlands"
 	},
 	{
-	  "capital": "Nouméa",
-	  "code": "nc",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/nc.svg",
-	  "flag_4x3": "flags/4x3/nc.svg",
-	  "iso": true,
-	  "name": "New Caledonia"
-	},
-	{
 	  "capital": "Wellington",
 	  "code": "nz",
 	  "continent": "Oceania",
@@ -1539,24 +1117,6 @@ export const Countries:ICountry[] = [
 	  "name": "Nigeria"
 	},
 	{
-	  "capital": "Alofi",
-	  "code": "nu",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/nu.svg",
-	  "flag_4x3": "flags/4x3/nu.svg",
-	  "iso": true,
-	  "name": "Niue"
-	},
-	{
-	  "capital": "Kingston",
-	  "code": "nf",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/nf.svg",
-	  "flag_4x3": "flags/4x3/nf.svg",
-	  "iso": true,
-	  "name": "Norfolk Island"
-	},
-	{
 	  "capital": "Pyongyang",
 	  "code": "kp",
 	  "continent": "Asia",
@@ -1575,24 +1135,6 @@ export const Countries:ICountry[] = [
 	  "name": "North Macedonia"
 	},
 	{
-	  "capital": "Belfast",
-	  "code": "gb-nir",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/gb-nir.svg",
-	  "flag_4x3": "flags/4x3/gb-nir.svg",
-	  "iso": false,
-	  "name": "Northern Ireland"
-	},
-	{
-	  "capital": "Saipan",
-	  "code": "mp",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/mp.svg",
-	  "flag_4x3": "flags/4x3/mp.svg",
-	  "iso": true,
-	  "name": "Northern Mariana Islands"
-	},
-	{
 	  "capital": "Oslo",
 	  "code": "no",
 	  "continent": "Europe",
@@ -1609,13 +1151,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/om.svg",
 	  "iso": true,
 	  "name": "Oman"
-	},
-	{
-	  "code": "pc",
-	  "flag_1x1": "flags/1x1/pc.svg",
-	  "flag_4x3": "flags/4x3/pc.svg",
-	  "iso": false,
-	  "name": "Pacific Community"
 	},
 	{
 	  "capital": "Islamabad",
@@ -1681,15 +1216,6 @@ export const Countries:ICountry[] = [
 	  "name": "Philippines"
 	},
 	{
-	  "capital": "Adamstown",
-	  "code": "pn",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/pn.svg",
-	  "flag_4x3": "flags/4x3/pn.svg",
-	  "iso": true,
-	  "name": "Pitcairn"
-	},
-	{
 	  "capital": "Warsaw",
 	  "code": "pl",
 	  "continent": "Europe",
@@ -1708,15 +1234,6 @@ export const Countries:ICountry[] = [
 	  "name": "Portugal"
 	},
 	{
-	  "capital": "San Juan",
-	  "code": "pr",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/pr.svg",
-	  "flag_4x3": "flags/4x3/pr.svg",
-	  "iso": true,
-	  "name": "Puerto Rico"
-	},
-	{
 	  "capital": "Doha",
 	  "code": "qa",
 	  "continent": "Asia",
@@ -1724,15 +1241,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/qa.svg",
 	  "iso": true,
 	  "name": "Qatar"
-	},
-	{
-	  "capital": "Brazzaville",
-	  "code": "cg",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/cg.svg",
-	  "flag_4x3": "flags/4x3/cg.svg",
-	  "iso": true,
-	  "name": "Republic of the Congo"
 	},
 	{
 	  "capital": "Bucharest",
@@ -1762,42 +1270,6 @@ export const Countries:ICountry[] = [
 	  "name": "Rwanda"
 	},
 	{
-	  "capital": "Saint-Denis",
-	  "code": "re",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/re.svg",
-	  "flag_4x3": "flags/4x3/re.svg",
-	  "iso": true,
-	  "name": "Réunion"
-	},
-	{
-	  "capital": "Gustavia",
-	  "code": "bl",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/bl.svg",
-	  "flag_4x3": "flags/4x3/bl.svg",
-	  "iso": true,
-	  "name": "Saint Barthélemy"
-	},
-	{
-	  "capital": "Jamestown",
-	  "code": "sh-hl",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/sh-hl.svg",
-	  "flag_4x3": "flags/4x3/sh-hl.svg",
-	  "iso": false,
-	  "name": "Saint Helena"
-	},
-	{
-	  "capital": "Jamestown",
-	  "code": "sh",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/sh.svg",
-	  "flag_4x3": "flags/4x3/sh.svg",
-	  "iso": true,
-	  "name": "Saint Helena, Ascension and Tristan da Cunha"
-	},
-	{
 	  "capital": "Basseterre",
 	  "code": "kn",
 	  "continent": "North America",
@@ -1814,33 +1286,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/lc.svg",
 	  "iso": true,
 	  "name": "Saint Lucia"
-	},
-	{
-	  "capital": "Marigot",
-	  "code": "mf",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/mf.svg",
-	  "flag_4x3": "flags/4x3/mf.svg",
-	  "iso": true,
-	  "name": "Saint Martin"
-	},
-	{
-	  "capital": "Saint-Pierre",
-	  "code": "pm",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/pm.svg",
-	  "flag_4x3": "flags/4x3/pm.svg",
-	  "iso": true,
-	  "name": "Saint Pierre and Miquelon"
-	},
-	{
-	  "capital": "Kingstown",
-	  "code": "vc",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/vc.svg",
-	  "flag_4x3": "flags/4x3/vc.svg",
-	  "iso": true,
-	  "name": "Saint Vincent and the Grenadines"
 	},
 	{
 	  "capital": "Apia",
@@ -1877,15 +1322,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/sa.svg",
 	  "iso": true,
 	  "name": "Saudi Arabia"
-	},
-	{
-	  "capital": "Edinburgh",
-	  "code": "gb-sct",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/gb-sct.svg",
-	  "flag_4x3": "flags/4x3/gb-sct.svg",
-	  "iso": false,
-	  "name": "Scotland"
 	},
 	{
 	  "capital": "Dakar",
@@ -1933,15 +1369,6 @@ export const Countries:ICountry[] = [
 	  "name": "Singapore"
 	},
 	{
-	  "capital": "Philipsburg",
-	  "code": "sx",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/sx.svg",
-	  "flag_4x3": "flags/4x3/sx.svg",
-	  "iso": true,
-	  "name": "Sint Maarten"
-	},
-	{
 	  "capital": "Bratislava",
 	  "code": "sk",
 	  "continent": "Europe",
@@ -1987,15 +1414,6 @@ export const Countries:ICountry[] = [
 	  "name": "South Africa"
 	},
 	{
-	  "capital": "King Edward Point",
-	  "code": "gs",
-	  "continent": "Antarctica",
-	  "flag_1x1": "flags/1x1/gs.svg",
-	  "flag_4x3": "flags/4x3/gs.svg",
-	  "iso": true,
-	  "name": "South Georgia and the South Sandwich Islands"
-	},
-	{
 	  "capital": "Seoul",
 	  "code": "kr",
 	  "continent": "Asia",
@@ -2032,15 +1450,6 @@ export const Countries:ICountry[] = [
 	  "name": "Sri Lanka"
 	},
 	{
-	  "capital": "Ramallah",
-	  "code": "ps",
-	  "continent": "Asia",
-	  "flag_1x1": "flags/1x1/ps.svg",
-	  "flag_4x3": "flags/4x3/ps.svg",
-	  "iso": true,
-	  "name": "State of Palestine"
-	},
-	{
 	  "capital": "Khartoum",
 	  "code": "sd",
 	  "continent": "Africa",
@@ -2057,15 +1466,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/sr.svg",
 	  "iso": true,
 	  "name": "Suriname"
-	},
-	{
-	  "capital": "Longyearbyen",
-	  "code": "sj",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/sj.svg",
-	  "flag_4x3": "flags/4x3/sj.svg",
-	  "iso": true,
-	  "name": "Svalbard and Jan Mayen"
 	},
 	{
 	  "capital": "Stockholm",
@@ -2131,15 +1531,6 @@ export const Countries:ICountry[] = [
 	  "name": "Thailand"
 	},
 	{
-	  "capital": "Dili",
-	  "code": "tl",
-	  "continent": "Asia",
-	  "flag_1x1": "flags/1x1/tl.svg",
-	  "flag_4x3": "flags/4x3/tl.svg",
-	  "iso": true,
-	  "name": "Timor-Leste"
-	},
-	{
 	  "capital": "Lomé",
 	  "code": "tg",
 	  "continent": "Africa",
@@ -2147,15 +1538,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/tg.svg",
 	  "iso": true,
 	  "name": "Togo"
-	},
-	{
-	  "capital": "Nukunonu, Atafu,Tokelau",
-	  "code": "tk",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/tk.svg",
-	  "flag_4x3": "flags/4x3/tk.svg",
-	  "iso": true,
-	  "name": "Tokelau"
 	},
 	{
 	  "capital": "Nukuʻalofa",
@@ -2176,15 +1558,6 @@ export const Countries:ICountry[] = [
 	  "name": "Trinidad and Tobago"
 	},
 	{
-	  "capital": "Edinburgh of the Seven Seas",
-	  "code": "sh-ta",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/sh-ta.svg",
-	  "flag_4x3": "flags/4x3/sh-ta.svg",
-	  "iso": false,
-	  "name": "Tristan da Cunha"
-	},
-	{
 	  "capital": "Tunis",
 	  "code": "tn",
 	  "continent": "Africa",
@@ -2201,15 +1574,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/tm.svg",
 	  "iso": true,
 	  "name": "Turkmenistan"
-	},
-	{
-	  "capital": "Cockburn Town",
-	  "code": "tc",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/tc.svg",
-	  "flag_4x3": "flags/4x3/tc.svg",
-	  "iso": true,
-	  "name": "Turks and Caicos Islands"
 	},
 	{
 	  "capital": "Funafuti",
@@ -2266,22 +1630,6 @@ export const Countries:ICountry[] = [
 	  "name": "United Kingdom"
 	},
 	{
-	  "code": "un",
-	  "flag_1x1": "flags/1x1/un.svg",
-	  "flag_4x3": "flags/4x3/un.svg",
-	  "iso": false,
-	  "name": "United Nations"
-	},
-	{
-	  "capital": "Washington, D.C.",
-	  "code": "um",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/um.svg",
-	  "flag_4x3": "flags/4x3/um.svg",
-	  "iso": true,
-	  "name": "United States Minor Outlying Islands"
-	},
-	{
 	  "capital": "Washington, D.C.",
 	  "code": "us",
 	  "continent": "North America",
@@ -2334,51 +1682,6 @@ export const Countries:ICountry[] = [
 	  "flag_4x3": "flags/4x3/vn.svg",
 	  "iso": true,
 	  "name": "Vietnam"
-	},
-	{
-	  "capital": "Road Town",
-	  "code": "vg",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/vg.svg",
-	  "flag_4x3": "flags/4x3/vg.svg",
-	  "iso": true,
-	  "name": "Virgin Islands (British)"
-	},
-	{
-	  "capital": "Charlotte Amalie",
-	  "code": "vi",
-	  "continent": "North America",
-	  "flag_1x1": "flags/1x1/vi.svg",
-	  "flag_4x3": "flags/4x3/vi.svg",
-	  "iso": true,
-	  "name": "Virgin Islands (U.S.)"
-	},
-	{
-	  "capital": "Cardiff",
-	  "code": "gb-wls",
-	  "continent": "Europe",
-	  "flag_1x1": "flags/1x1/gb-wls.svg",
-	  "flag_4x3": "flags/4x3/gb-wls.svg",
-	  "iso": false,
-	  "name": "Wales"
-	},
-	{
-	  "capital": "Mata-Utu",
-	  "code": "wf",
-	  "continent": "Oceania",
-	  "flag_1x1": "flags/1x1/wf.svg",
-	  "flag_4x3": "flags/4x3/wf.svg",
-	  "iso": true,
-	  "name": "Wallis and Futuna"
-	},
-	{
-	  "capital": "Laayoune",
-	  "code": "eh",
-	  "continent": "Africa",
-	  "flag_1x1": "flags/1x1/eh.svg",
-	  "flag_4x3": "flags/4x3/eh.svg",
-	  "iso": true,
-	  "name": "Western Sahara"
 	},
 	{
 	  "capital": "Sana'a",
