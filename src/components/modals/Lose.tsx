@@ -4,20 +4,8 @@ import { HomeButton } from "../ui-elements/HomeButton"
 import { CSSProperties, Fragment, useState } from "react"
 import { MaxScore } from "../ui-elements/MaxScore";
 import { RewardCoins } from "../ui-elements/RewardCoins";
+import '../../../src/style/Modal.css'
 
-const modalStyle: CSSProperties = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    color: "white",
-    padding: "3rem",
-    fontSize: "30px",
-    textAlign: "center",
-    borderRadius: "26px",
-    background: "#2c2c2c",
-    boxShadow: "1px 0px 2px #554634",
-    transform: "translate(-50%, -50%)",
-}
 const filterStyle: CSSProperties = {
     zIndex: '0!important',
     backgroundColor: '#00000047!important', 
@@ -31,7 +19,7 @@ return (
     <Fragment>
         {!dismiss && <div className="screen-filter" style={filterStyle}></div>}
         
-        <div style={modalStyle}>
+        <div className="modal-style">
             <MaxScore text={`Score: ${score}`} className={"play-score"} />
             <RewardCoins coins={score * 5}/>
             <div>

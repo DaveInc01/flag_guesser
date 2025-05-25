@@ -1,0 +1,88 @@
+.modal-style {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 3rem;
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    border-radius: 26px;
+    background: #2c2c2c;
+    box-shadow: 1px 0px 2px #554634;
+    transform: translate(-50%, -50%);
+}
+
+.text-input {  
+    font-size: 20px!important;
+    width: 400px;
+    outline: none; 
+    appearance: none; 
+    max-width: 550px;
+    cursor: pointer;
+    margin-top: 30px;
+    user-select: none;
+    text-align: center;
+    padding: 25px 0px;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    background: #f7911e;
+    color: rgb(255, 255, 250);
+    box-shadow: 1px 5px #85381c;
+    font-family: DelaGothicOne
+}
+
+.custom-dropdown {
+    position: relative;
+    width: 250px;
+    font-family: Arial, sans-serif;
+}
+
+.dropdown-selected {
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.dropdown-options {
+    position: absolute;
+    top: 90%;
+    left: 0;
+    width: 100%;
+    background-color: #4d97a1;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    list-style: none;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown-item .fi {
+    margin-right: 10px; /* Space between flag icon and country name */
+    font-size: 18px; /* Adjust flag icon size */
+}
+
+.dropdown-item .country-name {
+    flex-grow: 1;
+    font-weight: 500;
+}
+
+/* Add some hover effects for better interactivity */
+.dropdown-item:hover .country-name {
+    color: #007BFF;
+    font-weight: bold;
+}
