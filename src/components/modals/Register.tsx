@@ -1,3 +1,4 @@
+import { couldStartTrivia } from 'typescript';
 import '../../../src/style/Modal.css'
 import { Countries, ICountry } from '../../constants/countries'
 import { useState, useRef } from 'react';
@@ -30,6 +31,7 @@ export const RegisterModal = () => {
 
     const createRoom =() => {
         setValidAlert(false)
+        let clientId;
         let ws = new WebSocket("ws://localhost:9090")
         ws.onmessage = message => {
             const response = JSON.parse(message.data)
@@ -42,14 +44,27 @@ export const RegisterModal = () => {
                     "country": selectedCountry,
                     "mode": "1v1"
                 }
-                console.log(payload)
+                clientId =  response.clientId
                 console.log(response)
                 ws.send(JSON.stringify(payload))
             }
             // create
-            if(response.method === "create"){
+            else if(response.method === "create"){
                 const clientId = response.clientId
                 console.log("Game was succefully created, your Id - ", clientId)
+            }
+            else if(response.method === "wait")
+            {
+                
+                console.log("Finding a game ...\n", response)
+            }
+            else if(response.method ==="play")
+            {
+                console.log("Game is sucssefully created", response)
+            }
+            else if(response.method === "fail")
+            {
+                console.log("Can't create a game", response)
             }
         }
     }
