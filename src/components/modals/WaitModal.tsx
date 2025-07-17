@@ -20,7 +20,6 @@ type WaitModalProps = {  cancelButton?: boolean; setShowWait?: (show: boolean) =
 const WaitModal: React.FC<WaitModalProps> = ({cancelButton, setShowWait} ) => {
   const dots = ['.', '..', '...'];
   const [index, setIndex] = React.useState(0);
-  leaveGame()
   // Animation for fading in and out
   const fade = useSpring({
     opacity: 1,

@@ -7,8 +7,10 @@ import { set } from 'lodash';
 
 export function leaveGame () {
     if(client.ws)
-    { 
+    {
         defaultPayload.method = "leave";
+
+        console.log(defaultPayload)
         client.ws.send(JSON.stringify(defaultPayload))
     }
 }
@@ -16,13 +18,14 @@ export function leaveGame () {
 interface Ipayload {
     method: string,
     clientId: string,
+    game: Object,
     gameId: string | undefined,
     nickname: string | undefined,
     country: string,
     mode: string
 }
 
-interface Iclient {
+interface Iclient { 
     clientId: string;
     nickname: string;
     country: string;
@@ -66,19 +69,24 @@ export const RegisterModal = () => {
         let ws = new WebSocket("ws://localhost:9090")
         ws.onmessage = message => {
             const response = JSON.parse(message.data)
+            console.log(response)
             clientId =  response.clientId
+            const payload: Ipayload = {
+                "method": response.method,
+                "clientId": response.clientId,
+                "gameId": response.gameId && undefined,
+                "game": response.game,
+                "nickname": nickname.current?.value,
+                "country": selectedCountry,
+                "mode": "1v1"
+            }
+            defaultPayload = payload
             // connect
             if(response.method === "connect"){
-                const payload: Ipayload = {
-                    "method": "create",
-                    "clientId": response.clientId,
-                    "gameId": undefined,
-                    "nickname": nickname.current?.value,
-                    "country": selectedCountry,
-                    "mode": "1v1"
-                }
+                console.log('payload has come ', response)
                 //set default payload above parameters for first
-                defaultPayload = payload;
+                payload.method = 'create'
+                // defaultPayload = payload;
                 //set global client 
                 client.clientId = payload.clientId
                 client.nickname = payload.nickname

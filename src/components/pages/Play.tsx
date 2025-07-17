@@ -11,13 +11,14 @@ import { GameConfig } from "../../constants/game-config";
 import { CSSProperties, useEffect, useState, useRef } from "react";
 import { ICountry, Countries } from "../../constants/countries";
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { decrementEnergy, incrementCoins, incrementMaxScore } from '../../features/user/userSlice';
+import { decrementEnergy, incrementCoins, incrementMaxScore, setIsCorrectAnswer } from '../../features/user/userSlice';
 import { selectorEnergy, selectorMaxScore } from '../../features/user/userSelector';
 import { InfoDeskButton } from '../ui-elements/InfoDeskButton';
 import { selectorSounds } from "../../features/user/userSelector";
 import { playSound } from "../../services/audio";
 import { ISounds } from '../../constants/media';
 import { useNavigate } from 'react-router-dom';
+import '../../style/PlayContent.css'
 
 const headerStyle:CSSProperties = {
     display:'flex',
@@ -77,7 +78,6 @@ export const PlayPage = () => {
     const [solvedCountryNames, setSolvedCountryNames] = useState<ICountry['name'][]>([]);
     const [selectedCountryName, setSelectedCountryName] = useState<ICountry['name']>('');
     const [isCorrectAnswer, setAnswer] = useState<boolean>(false)
-
     const stopSound = (audio:HTMLAudioElement)=>{
         audio.pause()
         audio.currentTime = 0;
@@ -92,8 +92,9 @@ export const PlayPage = () => {
         nextQuestion()
         Promise.resolve(new Promise((r) => setTimeout(() => r(null), 600)))
     }
-
+    
     const nextQuestion = () => {
+        dispatch(setIsCorrectAnswer(null))
         setSolvedCountryNames([...solvedCountryNames, selectedCountryName]);
 
         const newFourCountries = makeFourCountries(getCountriesWithEmptyClassess(Countries), solvedCountryNames)
@@ -135,12 +136,15 @@ export const PlayPage = () => {
     const onSelect = (selectedCountryName: ICountry['name']) => {
 
         setSelectedCountryName(selectedCountryName);
-
         setDisableEvent(true)
-
-        let answer =  selectedCountryName === rightCountryName;
+        
+        let answer = selectedCountryName === rightCountryName;
         setAnswer(answer)
-
+        if(selectedCountryName !== '')
+        {
+            console.log("Dispatch works ", selectedCountryName)
+            dispatch(setIsCorrectAnswer(answer))
+        }
         if (answer){
             stopSound(timerSound)
             playSound(ISounds.correct, sounds).then(()=>{
@@ -222,30 +226,32 @@ export const PlayPage = () => {
 
 return (
     <div>
-        <Container>
-            <header style={headerStyle}>
-                <ButtonIcon icon="/assets/images/icons/forward-left.svg" clickCallback={backBtnClick}/>
-                <PlayTimer currentTime={time} />
-                <div>
-                    <InfoDeskButton 
-                        text={energy.toString()} 
-                        icon="/assets/images/home/energy.png"
-                        isPlusButton={false}
-                        noneDesk={true} 
-                    />
-                    <Hearts maxCount={3} count={hearts}/>
-                </div>
-            </header>
-            <PlayContent
-                style={{pointerEvents:disableEvent || lose ?'none':'all'}} 
-                score={score}
-                rightCountryName={rightCountryName} 
-                onSelect={(cName: ICountry['name']) => onSelect(cName)} 
-                onSetScore={() => {}}
-                onTimeUp={() => {}}
-                countries={fourCountries}/>
-            
-            {lose && <LoseModal score={score} callBack={RestartGame} />}
+        <Container className="play-container">
+            <div className='inner-play-container'>
+                <header style={headerStyle}>
+                    <ButtonIcon icon="/assets/images/icons/forward-left.svg" clickCallback={backBtnClick}/>
+                    <PlayTimer currentTime={time} />
+                    <div>
+                        <InfoDeskButton 
+                            text={energy.toString()} 
+                            icon="/assets/images/home/energy.png"
+                            isPlusButton={false}
+                            noneDesk={true} 
+                        />
+                        <Hearts maxCount={3} count={hearts}/>
+                    </div>
+                </header>
+                <PlayContent
+                    style={{pointerEvents:disableEvent || lose ?'none':'all'}} 
+                    score={score}
+                    rightCountryName={rightCountryName} 
+                    onSelect={(cName: ICountry['name']) => onSelect(cName)} 
+                    onSetScore={() => {}}
+                    onTimeUp={() => {}}
+                    countries={fourCountries}/>
+                
+                {lose && <LoseModal score={score} callBack={RestartGame} />}
+            </div>
         </Container>
     </div>
 )}

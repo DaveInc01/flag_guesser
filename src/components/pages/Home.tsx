@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { HomeHeader } from "../layouts/HomeHeader";
 import { paths } from "../../constants/paths";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { decrementCoins, decrementEnergy } from "../../features/user/userSlice";
+import { decrementCoins, decrementEnergy, setIsCorrectAnswer } from "../../features/user/userSlice";
 
 import '../../index.css';
 import { playSound } from "../../services/audio";
@@ -32,6 +32,7 @@ export const HomePage:ComponentType<{}>  = () => {
                     <HomeButton key={index} title={title} onClick={() => {
                         playSound(ISounds.button, sounds).then(() => {
                             if(path.includes(paths.Play)) {
+                                dispatch(setIsCorrectAnswer(null))
                                 dispatch(decrementEnergy())
                                 Promise
                                 .resolve(new Promise((r) => setTimeout(() => r(null), 200)))

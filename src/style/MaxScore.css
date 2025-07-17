@@ -7,8 +7,11 @@
     font-size: 20px;
 }
 
+.play-score{
+    font-size: 30px!important;
+}
+
 .home-max-score{
     text-transform: capitalize;
 }
 
-.play-score{}

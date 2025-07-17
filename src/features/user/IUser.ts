@@ -7,6 +7,9 @@ export interface IUser {
     username: string,
     countryCode: string,
     displayedAvatar: AvatarT,
+    inGame: {
+        isCorrectAnswer: null | boolean
+    },
     userItems: {
         coins: number,
         maxScore: number,

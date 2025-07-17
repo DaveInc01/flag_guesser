@@ -10,6 +10,9 @@ const initialState:IUser = {
     email: 'johnDoe@gmail.com',
     countryCode: 'us',
     displayedAvatar: avatarId,
+    inGame: {
+        isCorrectAnswer: null
+    },
     userItems:{
         coins: 50,
         energy: 10,
@@ -45,6 +48,9 @@ export const userSlice = createSlice({
         },
         toggleSounds: (state, action: PayloadAction<boolean>) => {
             state.settings.sounds = action.payload
+        },
+        setIsCorrectAnswer:(state, action) =>{
+            state.inGame.isCorrectAnswer = action.payload
         }
     },
   })
@@ -56,6 +62,7 @@ export const userSlice = createSlice({
     incrementEnergy,
     incrementMaxScore,
     decrementEnergy,
-    toggleSounds } = userSlice.actions;
+    toggleSounds,
+    setIsCorrectAnswer } = userSlice.actions;
   
   export default userSlice.reducer;

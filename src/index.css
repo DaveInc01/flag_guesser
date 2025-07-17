@@ -2,10 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+:root {
+  /* brand / theme colours */
+  --c-bg:        #0d2941;  /* play-area navy */
+  --c-card-bg:   #0f2536;
+  --c-correct:   #30d158; /* iOS “success” green */
+  --c-wrong:     #ff453a; /* iOS “error” red   */
+  --c-pill:      #102c40;
+  --c-text-main: #ffffff;
+  --c-text-dim:  #c6d6e4;
+}
+
+
 @font-face {
     font-family: DelaGothicOne;
     src: url(../public/assets/fonts/DelaGothicOne.ttf);
 }
+
 .avatar-desk > :last-child img {
     width: 40px!important;
     padding: 3px!important;
