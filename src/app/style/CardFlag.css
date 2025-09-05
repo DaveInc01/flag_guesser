@@ -1,0 +1,58 @@
+.card-success {border-color: #2fa52f!important}
+.card-danger {border-color: #c43f3f!important}
+.card-success, .card-danger {
+    border-color: 3px solid;
+}
+
+@media (max-width: 768px) {
+
+}
+/* 
+.main-card > div {
+    margin: auto;
+    cursor: pointer;
+    font-size: 11vw;
+    user-select: none;
+    border: 3px solid transparent;
+    display: block;
+    overflow: hidden;
+    align-items: center;
+    display: flex!important;
+    will-change: transform, opacity;
+} */
+
+
+/* spring css */
+
+.c {
+    display: inline-block;
+    font-size: 200px;
+    max-width: 200px;
+    max-height: 150px;
+    width: 200px;
+    height: 150px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    will-change: transform, opacity;
+  }
+  
+  .front,
+  .back {
+    background-size: cover;
+  }
+  
+  .back {
+    background-image: url(https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop);
+  }
+  
+  .front {
+    background-image: url(https://images.unsplash.com/photo-1540206395-68808572332f?ixlib=rb-1.2.1&w=1181&q=80&auto=format&fit=crop);
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+  }
+  

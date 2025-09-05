@@ -1,0 +1,27 @@
+.textInput {
+    display: block;
+    font-size: 17px!important;
+    width: 400px;
+    outline: none; 
+    appearance: none; 
+    max-width: 550px;
+    cursor: pointer;
+    margin-top: 30px;
+    user-select: none;
+    text-align: center;
+    padding: 18px 0px;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    background: #f7911e;
+    color: rgb(255, 255, 250);
+    box-shadow: 1px 5px #85381c;
+    font-family: DelaGothicOne
+}
+
+/* styles.module.css */
+:global(input:-webkit-autofill),
+:global(textarea:-webkit-autofill),
+:global(select:-webkit-autofill) {
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow: 0 0 0 1000px #f7911e inset !important;
+}

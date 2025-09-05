@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap'); */
+
+:root {
+  /* brand / theme colours */
+  --c-bg:        #0d2941;  /* play-area navy */
+  --c-card-bg:   #0f2536;
+  --c-correct:   #30d158; /* iOS “success” green */
+  --c-wrong:     #ff453a; /* iOS “error” red   */
+  --c-pill:      #102c40;
+  --c-text-main: #ffffff;
+  --c-text-dim:  #c6d6e4;
+}
+
+
+@font-face {
+    font-family: DelaGothicOne;
+    src: url(../../public/assets/fonts/DelaGothicOne.ttf);
+}
+
+.avatar-desk > :last-child img {
+    width: 40px!important;
+    padding: 3px!important;
+    border-radius: 72px!important;
+    height: 30px!important;
+}
+.btn-home {
+    transition-duration: 300ms
+}
+.btn-home:hover {
+    transform: scale(.9);
+    background-color: #e7861a!important;
+}
+
+.screen-background {
+    background-image : url(../../public/assets/images/background_2.jpeg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    width: 100%;
+    position: absolute;
+}
+.screen-filter {
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #000000b0;
+}

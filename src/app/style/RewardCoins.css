@@ -1,0 +1,14 @@
+.reward-coins{
+    display: flex;
+    justify-content: center;
+}
+
+.reward-coins span{
+    text-align: center;
+    font-family: DelaGothicOne;
+}
+
+.reward-coins img{
+    max-width: 45px;
+    margin-left: 10px;
+}

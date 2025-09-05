@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+:root {
+  /* brand / theme colours */
+  --c-bg:        #0d2941;  /* play-area navy */
+  --c-card-bg:   #0f2536;
+  --c-correct:   #30d158; /* iOS “success” green */
+  --c-wrong:     #ff453a; /* iOS “error” red   */
+  --c-pill:      #102c40;
+  --c-text-main: #ffffff;
+  --c-text-dim:  #c6d6e4;
+}
+
+/* .play-container {
+  min-height: 100vh;
+  font-family: 'Fredoka', sans-serif;
+  background: var(--c-bg);
+  color: var(--c-text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+} */
+
+.play-content h2 {
+    font-size: 26px;
+    margin: 30px 0px;
+}
+
+.play-content h2, .score{
+    text-align: center;
+    color: rgb(255,255,250);
+    font-family: DelaGothicOne;
+}

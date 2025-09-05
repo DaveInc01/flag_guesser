@@ -1,0 +1,19 @@
+.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.timer-logo {
+    width: 45px;
+    margin-right: 5px;
+}
+.timer-time, .timer-logo {
+    display: inline-block;
+    font-family: "DelaGothicOne";
+    color: rgb(255, 255, 250);
+}
+
+.timer-time {
+    font-size: 30px;
+    transition-duration: 500ms;
+}
