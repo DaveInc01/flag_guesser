@@ -1,12 +1,11 @@
 import { io, Socket } from 'socket.io-client';
 import { useEffect, useRef } from "react";
-// import { useAppDispatch } from './hooks';
+import { useAppDispatch } from './hooks';
 import { socket } from "./socket";
 
 const socketInstance = socket();
 
 export const useSocketListener = () => {
-  console.log('Socket instance:', socketInstance);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

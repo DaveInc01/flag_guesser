@@ -73,7 +73,7 @@ function makeFourCountries(
 function makeRightCountryName(_countries: ICountry[]): ICountry["name"] {
   return _countries[random(0, _countries.length - 1)]?.name || "";
 }
-
+  
 function getCountriesWithEmptyClassess(
   countries: ICountry[]
 ): ICardFlag["country"][] {
@@ -103,7 +103,7 @@ export default function PlayPage() {
   };
 
   return (
-    <AuthGuard>
+    // <AuthGuard>
       <div>
         <Container className="play-container">
           <div className="inner-play-container">
@@ -112,7 +112,7 @@ export default function PlayPage() {
           </div>
         </Container>
       </div>
-    </AuthGuard>
+    // </AuthGuard>
   );
 }
 

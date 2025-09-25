@@ -14,7 +14,7 @@ const initialState:IUser = {
     inGame: {
         question: '',
         answer: '',
-        allAnswers: new Map<ICountry["name"], ICountry["name"]>(), // [correctFlagName, choosedFlagName ]
+        allAnswers: [], // [[question, answer]]
         isLose: false,
     },
     userItems:{
@@ -60,13 +60,14 @@ export const userSlice = createSlice({
             state.inGame.isLose = action.payload
         },
         setAnswer: (state, action: PayloadAction<string>) => {
-            console.log(state.inGame.question, 'question...');
-            console.log(action.payload, 'answer...');
-            state.inGame.allAnswers.set(state.inGame.question, action.payload);
-            state.userItems.maxScore = Math.max(
-                state.userItems.maxScore,
-                [...state.inGame.allAnswers].filter(([q, a]) => q === a).length
-            );
+            // console.log(state.inGame.question, 'question...');
+            // console.log(action.payload, 'answer...');
+            // console.log(`${state.inGame.question}: ${action.payload}`)
+            state.inGame.allAnswers.push([state.inGame.question, action.payload]);
+            state.userItems.maxScore = state.inGame.allAnswers.filter(([question, answer]) => {
+                return question === answer
+            }).length
+            console.log('score', state.userItems.maxScore)
         }
 
     },

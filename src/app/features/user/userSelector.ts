@@ -1,19 +1,20 @@
 import { Countries } from "@/app/constants/countries";
 import { RootState } from "@/app/store";
+import { createSelector } from '@reduxjs/toolkit';
 
-export const selectorUser = (state:RootState) => state.user;  
-export const selectorMaxScore = (state:RootState) => state.user.userItems.maxScore;  
-export const selectorEnergy = (state:RootState) => state.user.userItems.energy;  
-export const selectorCoins = (state:RootState) => state.user.userItems.coins;  
-export const selectorAvatarIds = (state:RootState) => state.user.userItems.avatarIds;  
-export const selectorUsername = (state:RootState) => state.user.username;  
-export const selectorSounds = (state:RootState) => state.user.settings.sounds;
-export const selectorIsLose = (state:RootState) => state.user.inGame.isLose;
-export const selectorQuestion = (state:RootState) => state.user.inGame.question;
+ const selectorUser = (state:RootState) => state.user;  
+const selectorMaxScore = (state:RootState) => state.user.userItems.maxScore;  
+const selectorEnergy = (state:RootState) => state.user.userItems.energy;  
+const selectorCoins = (state:RootState) => state.user.userItems.coins;  
+const selectorAvatarIds = (state:RootState) => state.user.userItems.avatarIds;  
+const selectorUsername = (state:RootState) => state.user.username;  
+const selectorSounds = (state:RootState) => state.user.settings.sounds;
+const selectorIsLose = (state:RootState) => state.user.inGame.isLose;
+const selectorQuestion = (state:RootState) => state.user.inGame.question;
 
 
 // Find is the correct answer
-export const selectorIsCorrectAnswer = (state:RootState) => {
+const selectorIsCorrectAnswer = (state:RootState) => {
     const findAnswer = [...state.user.inGame.allAnswers]
         .find(([question]) => question === state.user.inGame.question);
     if (findAnswer) {
@@ -22,10 +23,10 @@ export const selectorIsCorrectAnswer = (state:RootState) => {
     return false;
 };
 
-export const selectorScore = (state:RootState) => [...state.user.inGame.allAnswers]
+const selectorScore = (state:RootState) => [...state.user.inGame.allAnswers]
     .filter(([question,answer]) => question === answer).length;
 
-export const selectorAnswer = (state:RootState) => {
+const selectorAnswer = (state:RootState) => {
     const findAnswer = [...state.user.inGame.allAnswers]
         .find(([question]) => question === state.user.inGame.question);
     if (findAnswer) {
@@ -34,7 +35,35 @@ export const selectorAnswer = (state:RootState) => {
     return null;
 };
 
-export const selectorFilteredCountries = (state:RootState) => {
-    const answeredQuestions = [...state.user.inGame.allAnswers].map(([q]) => q);
-    return Countries.filter(({ code }) => !answeredQuestions.includes(code));
+
+
+
+const selectorAllAnswers = (state: RootState) => {
+    return state.user.inGame.allAnswers
 }
+
+const selectorFilteredCountries = createSelector(
+    [selectorAllAnswers],
+    (allAnswers)=>{
+        const questions = allAnswers.map(([question, answer]) => question);
+        return Countries.filter(({ name }) => !questions.includes(name));
+    }
+)
+
+export  {
+    selectorUser,
+    selectorMaxScore,
+    selectorEnergy,
+    selectorCoins,
+    selectorAvatarIds,
+    selectorUsername,
+    selectorSounds,
+    selectorIsLose,
+    selectorQuestion,
+    selectorIsCorrectAnswer,
+    selectorScore,
+    selectorAnswer,
+    selectorAllAnswers,
+    selectorFilteredCountries
+}
+

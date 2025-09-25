@@ -1,6 +1,8 @@
 import { ICountry } from "@/app/constants/countries"
 import { IntRange } from "@/app/utils"
 
+type allAnswers = [ICountry['name'], ICountry['name']] 
+
 export type IUsers = IUser[]
 type AvatarT =  IUser["userItems"]["avatarIds"][number]
 export interface IUser {
@@ -11,7 +13,7 @@ export interface IUser {
     inGame: {
         question: ICountry["name"],
         answer: ICountry["name"],
-        allAnswers: Map<ICountry["name"], ICountry["name"]>,
+        allAnswers: allAnswers[], // [[question, answer]]
         isLose: Boolean
     },
     userItems: {
