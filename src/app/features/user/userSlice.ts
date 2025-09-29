@@ -68,6 +68,9 @@ export const userSlice = createSlice({
                 return question === answer
             }).length
             console.log('score', state.userItems.maxScore)
+        },
+        clearAllAnswers: (state) => {
+            state.inGame.allAnswers = []
         }
 
     },
@@ -84,6 +87,7 @@ export const userSlice = createSlice({
     setAnswer,
     setLose,
     setQuestion,
+    clearAllAnswers
 } = userSlice.actions;
   
   export default userSlice.reducer;

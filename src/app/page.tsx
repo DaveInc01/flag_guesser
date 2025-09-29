@@ -2,7 +2,7 @@
 import React, { ComponentType, useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useRouter } from "next/navigation";
-import { selectorSounds } from "./features/user/userSelector";
+import { selectorIsSoundsOn } from "./features/user/userSelector";
 import { HomeHeader } from "./components/layouts/HomeHeader";
 import { HomeButton } from "./components/ui-elements/HomeButton";
 import { navigationItems } from "./constants/navigation";
@@ -17,7 +17,7 @@ export default function Home () {
     const dispatch = useAppDispatch()
     const router = useRouter();
     const navigate = (path: string) => router.push(path);
-    let sounds   = useAppSelector(selectorSounds)
+    let sounds   = useAppSelector(selectorIsSoundsOn)
 
     const menuStyle:React.CSSProperties = {
         display: "flex",

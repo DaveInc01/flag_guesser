@@ -36,18 +36,20 @@ export const CardFlag = ({
   }
 
   const answer = () => {
-    console.log(name, 'name.......');
-    dispatch(setAnswer(name));
-    setFlipped(true);
-    closeCard();
-  }
-
-  useEffect(() => {
-    if (isCorrectAnswer && !flipped) {
+    // corect answer should be null, otherwise already clicked and delay
+    if(isCorrectAnswer === null){
+      dispatch(setAnswer(name));
       setFlipped(true);
       closeCard();
     }
-  }, [isCorrectAnswer, flipped]);
+  }
+
+  // useEffect(() => {
+  //   if (isCorrectAnswer && !flipped) {
+  //     setFlipped(true);
+  //     closeCard();
+  //   }
+  // }, [isCorrectAnswer, flipped]);
 
   return (
     <div

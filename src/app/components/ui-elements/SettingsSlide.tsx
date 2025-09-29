@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react'
 import '../../style/SettingsSlide.css'
-import { selectorSounds } from "../../features/user/userSelector";
+import { selectorIsSoundsOn } from "../../features/user/userSelector";
 import { toggleSounds } from '../../features/user/userSlice';
 import { ISounds } from '../../constants/media';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
@@ -15,7 +15,7 @@ export const SettingsSlide = ()=>{
     const [slide, setSlide] = useState(false);
     const [sound, setSound] = useState(imgSoundOn);
 
-    let sounds_settings = useAppSelector(selectorSounds)
+    let sounds_settings = useAppSelector(selectorIsSoundsOn)
     // dispatch(toggleSounds(false));
     const soundToggle = () => {
         if (sound === imgSoundOn) {

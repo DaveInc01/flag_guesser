@@ -3,7 +3,7 @@ import { MouseEvent } from "react";
 import '../../style/ButtonIcon.css';
 import { ISounds } from "../../constants/media";
 import { useAppSelector } from "@/app/hooks";
-import { selectorSounds } from "../../features/user/userSelector";
+import { selectorIsSoundsOn } from "../../features/user/userSelector";
 import { playSound } from "@/app/features/services/audio";
 
 type IButtonIcon = {
@@ -18,7 +18,7 @@ export const ButtonIcon = ({
         className = '',
         clickCallback,
     }: IButtonIcon) => {
-    const soundSettings = useAppSelector(selectorSounds);
+    const soundSettings = useAppSelector(selectorIsSoundsOn);
     return (
     <span className={className} onClick={e => {
         clickCallback(e);

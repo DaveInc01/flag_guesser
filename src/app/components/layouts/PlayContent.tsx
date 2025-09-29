@@ -5,10 +5,12 @@ import "../../style/PlayContent.css";
 import { MaxScore } from "../ui-elements/MaxScore";
 import { use, useEffect, useMemo, useRef, useState } from "react";
 import UpFadingAnimation from "../animations/UpFadingAnimation";
-import { selectorAnswer, selectorFilteredCountries, selectorIsCorrectAnswer, selectorQuestion, selectorScore } from "../../features/user/userSelector";
+import { selectorAllAnswers, selectorAnswer, selectorFilteredCountries, selectorIsCorrectAnswer, selectorQuestion, selectorScore } from "../../features/user/userSelector";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { getRandomCountries } from "@/app/play/utils";
-import { setQuestion } from "@/app/features/user/userSlice";
+import { clearAllAnswers, setQuestion } from "@/app/features/user/userSlice";
+import { count } from "console";
+import { PlayHeader } from "../ui-elements/PlayHeader";
 
 const flagTableStyle: React.CSSProperties = {
   display: "grid",
@@ -29,6 +31,7 @@ export type IPlayContent = {
   countries: IItemFlag[];
 };
 
+
 export const PlayContent = () => {
   const dispatch = useAppDispatch();
   const titleRef = useRef<HTMLHeadingElement | null>(null);
@@ -40,34 +43,45 @@ export const PlayContent = () => {
   const filteredCountries = useAppSelector(selectorFilteredCountries);
   const answers = useAppSelector(state => state.user.inGame.allAnswers);
   const [countries, setCountries] = useState<ICountry[]>([]);
+  // const [nextQuestion, setNexquestion] = useState<Boolean | null>(null)
 
-
-  useEffect(() => {
-    if (!countries.length && !question && filteredCountries.length) {
+  const changeQuestion = () =>{
+    // if (!countries.length && !question && filteredCountries.length) {
       const randomCountries = getRandomCountries(filteredCountries);
-      const [q] = getRandomCountries(randomCountries, 1);
+      const [question] = getRandomCountries(randomCountries, 1);
       setCountries(randomCountries);
-      dispatch(setQuestion(q.name));
-    }
-  }, [countries, question, filteredCountries]);
+      dispatch(setQuestion(question.name));
+    // } 
+  }
+  // When component is mounted set question and flags
+  useEffect(() => {
+    dispatch(clearAllAnswers())
+    changeQuestion()
+  }, []);
+
 
   useEffect(() => {
+	console.log("Is correct ans - ", isCorretAnswer)
     setUpAnim(isCorretAnswer);
+	if (isCorretAnswer != null){
+		setTimeout(()=>{
+		  changeQuestion()
+		  console.log("Correct answer changed")
+		}, 2000)
+	}
   }, [isCorretAnswer]);
 
   return (
     <div className="play-content">
+		<PlayHeader/>
       <hr style={{ margin: "20px 0px" }} />
       <h2 style={titleStyle} ref={titleRef}>
         {question}
       </h2>
       <div ref={UpAnimRef}></div>
       {upAnim != null &&
-        (upAnim ? (
-          <UpFadingAnimation isAnswerCorrect={true} />
-        ) : (
-          <UpFadingAnimation isAnswerCorrect={false} />
-        ))}
+          <UpFadingAnimation isAnswerCorrect={upAnim} />
+      }
       <div style={{ ...flagTableStyle}}>
         {countries.map((country, key) => (
           <CardFlag

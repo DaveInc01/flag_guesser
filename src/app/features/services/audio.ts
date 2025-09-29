@@ -1,4 +1,4 @@
-import { ISounds } from "../constants/media";
+import { ISounds } from "@/app/constants/media";
 
 export const playSound = async (path:ISounds, isSoundOn:boolean) => {
     var audio = (new Audio(path))
@@ -11,3 +11,8 @@ export const playSound = async (path:ISounds, isSoundOn:boolean) => {
         }
     }
 }
+
+export const stopSound = (audio: HTMLAudioElement) => {
+    audio.pause();
+    audio.currentTime = 0;
+};
