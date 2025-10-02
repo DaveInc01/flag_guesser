@@ -2,41 +2,48 @@
 
 import { random, shuffle } from "lodash";
 
-import { GameConfig } from "../constants/game-config";
-import { CSSProperties, useEffect, useState, useRef } from "react";
-import { ICountry, Countries } from "../constants/countries";
-import { useAppSelector, useAppDispatch } from "../hooks";
-// import {
-//   decrementEnergy,
-//   incrementCoins,
-//   incrementMaxScore,
-//   setLose,
-  
-   
-// } from "../features/user/userSlice";
-import {
-  selectorEnergy,
-  selectorMaxScore,
-  selectorIsLose
-} from "../features/user/userSelector";
-
-import { selectorSounds } from "../features/user/userSelector";
-
-import { ISounds } from "../constants/media";
 import "../style/PlayContent.css";
-import AuthGuard from "@/app/components/AuthGuard";
-import { useRouter } from "next/navigation";
 import { ICardFlag } from "@/app/components/ui-elements/CardFlag";
-import { playSound } from "@/app/features/services/audio";
-import { paths } from "@/app/constants/paths";
 import { Container } from "@/app/components/layouts/Container";
-import { ButtonIcon } from "@/app/components/ui-elements/ButtonIcon";
-import { PlayTimer } from "@/app/components/ui-elements/PlayTimer";
-import { InfoDeskButton } from "@/app/components/ui-elements/InfoDeskButton";
-import { Hearts } from "@/app/components/ui-elements/Hearts";
-import { PlayContent } from "@/app/components/layouts/PlayContent";
-import { LoseModal } from "@/app/components/modals/Lose";
-import { decrementEnergy, setLose } from "../features/user/userSlice";
+//
+
+"use";
+import { Countries, ICountry } from "../constants/countries";
+import { CardFlag } from "../components/ui-elements/CardFlag";
+import { MaxScore } from "../components/ui-elements/MaxScore";
+import { use, useEffect, useMemo, useRef, useState, CSSProperties } from "react";
+import UpFadingAnimation from "../components/animations/UpFadingAnimation";
+import { selectorAllAnswers, selectorAnswer, selectorFilteredCountries, selectorIsCorrectAnswer, selectorQuestion, selectorScore, selectorIsLose } from "../features/user/userSelector";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { getRandomCountries } from "@/app/play/utils";
+import { clearAllAnswers, decrementEnergy, setHearts, setLose, setQuestion } from "@/app/features/user/userSlice";
+import { count } from "console";
+import { PlayHeader } from "../components/ui-elements/PlayHeader";
+import { LoseModal } from "../components/modals/Lose";
+import { GameConfig } from "@/app/constants/game-config";
+
+///
+
+const flagTableStyle: React.CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "auto auto",
+  gridGap: "20px",
+  textAlign: "center",
+};
+
+const titleStyle: React.CSSProperties = {
+  fontSize: "35px",
+  textShadow: "-4px 4px 8px black",
+  marginBottom: "50px",
+};
+
+type IItemFlag = ICountry & { className: string };
+
+export type IPlayContent = {
+  countries: IItemFlag[];
+};
+////
+
 
 const headerStyle: CSSProperties = {
   display: "flex",
@@ -53,62 +60,115 @@ const noneDesk: CSSProperties = {
   boxShadow: "#1e384a 0px 0px!important",
 };
 
-function removeSolves(
-  countries: ICardFlag["country"][],
-  solvedCountryNames: ICountry["name"][]
-): ICardFlag["country"][] {
-  return countries.filter(({ name }) => !solvedCountryNames.includes(name));
-}
+// function removeSolves(
+//   countries: ICardFlag["country"][],
+//   solvedCountryNames: ICountry["name"][]
+// ): ICardFlag["country"][] {
+//   return countries.filter(({ name }) => !solvedCountryNames.includes(name));
+// }
 
-function makeFourCountries(
-  countries: ICardFlag["country"][],
-  solvedCountryNames: ICountry["name"][]
-): ICardFlag["country"][] {
-  let filtred = shuffle(removeSolves(countries, solvedCountryNames));
-  let rand: number = random(0, filtred.length - 5);
+// function makeFourCountries(
+//   countries: ICardFlag["country"][],
+//   solvedCountryNames: ICountry["name"][]
+// ): ICardFlag["country"][] {
+//   let filtred = shuffle(removeSolves(countries, solvedCountryNames));
+//   let rand: number = random(0, filtred.length - 5);
 
-  return filtred.slice(rand, rand + 4);
-}
+//   return filtred.slice(rand, rand + 4);
+// }
 
-function makeRightCountryName(_countries: ICountry[]): ICountry["name"] {
-  return _countries[random(0, _countries.length - 1)]?.name || "";
-}
+// function makeRightCountryName(_countries: ICountry[]): ICountry["name"] {
+//   return _countries[random(0, _countries.length - 1)]?.name || "";
+// }
   
-function getCountriesWithEmptyClassess(
-  countries: ICountry[]
-): ICardFlag["country"][] {
-  return countries.map((c) => ({ ...c, className: "" }));
-}
+// function getCountriesWithEmptyClassess(
+//   countries: ICountry[]
+// ): ICardFlag["country"][] {
+//   return countries.map((c) => ({ ...c, className: "" }));
+// }
 
 
 
 export default function PlayPage() {
-  const [score, setScore] = useState<number>(GameConfig.parameters.score);
-  const [rightCountryName, setRightCountryName] = useState<ICountry["name"]>("");
-  const [hearts, setHearts] = useState<number>(GameConfig.parameters.hearts);
   let timeoutTime: NodeJS.Timeout;
-  const [time, setTime] = useState<number>(GameConfig.parameters.time);
-  const isLose = useAppSelector(selectorIsLose)
   const dispatch = useAppDispatch();
 
-  const RestartGame = () => {
-      setLose(false);
-      dispatch(decrementEnergy());
-      setHearts(GameConfig.parameters.hearts);
-      setScore(GameConfig.parameters.score);
-      // clearTimeout(timeoutTime);
-      setTime(GameConfig.parameters.time);
-      // nextQuestion();
-      Promise.resolve(new Promise((r) => setTimeout(() => r(null), 600)));
+  //
+  const [time, setTime] = useState<number>(GameConfig.parameters.time)
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const [upAnim, setUpAnim] = useState<boolean | null>(null);
+  const UpAnimRef = useRef<HTMLDivElement | null>(null);
+  const isCorretAnswer = useAppSelector(selectorIsCorrectAnswer);
+  const score = useAppSelector(selectorScore);
+  const question: ICountry["name"] | null = useAppSelector(selectorQuestion);
+  const filteredCountries = useAppSelector(selectorFilteredCountries);
+  const answers = useAppSelector(state => state.user.inGame.allAnswers);
+  const [countries, setCountries] = useState<ICountry[]>([]);
+  const isLose = useAppSelector(selectorIsLose)
+  // const [nextQuestion, setNexquestion] = useState<Boolean | null>(null)
+
+  const restartGame = () => {
+    dispatch(clearAllAnswers())
+    dispatch(setLose(false))
+    changeQuestion()
+    dispatch(decrementEnergy());
+    dispatch(setHearts(GameConfig.parameters.hearts))
+    setTime(GameConfig.parameters.time);
+    // Promise.resolve(new Promise((r) => setTimeout(() => r(null), 600)));
   };
+
+  const changeQuestion = () =>{
+      const randomCountries = getRandomCountries(filteredCountries);
+      const [question] = getRandomCountries(randomCountries, 1);
+      setCountries(randomCountries);
+      dispatch(setQuestion(question.name));
+  }
+  // When component is mounted set question and flags
+  useEffect(() => {
+    restartGame()
+  }, []);
+
+
+  useEffect(() => {
+	console.log("Is correct ans - ", isCorretAnswer)
+    setUpAnim(isCorretAnswer);
+	if (isCorretAnswer != null){
+		setTimeout(()=>{
+		  changeQuestion()
+		  console.log("Correct answer changed")
+		}, 2000)
+	}
+  }, [isCorretAnswer]);
 
   return (
     // <AuthGuard>
       <div>
         <Container className="play-container">
           <div className="inner-play-container">
-            <PlayContent />       
-            {isLose && <LoseModal score={score} callBack={RestartGame} />}
+            <div className="play-content">
+                <PlayHeader/>
+                  <hr style={{ margin: "20px 0px" }} />
+                  <h2 style={titleStyle} ref={titleRef}>
+                    {question}
+                  </h2>
+                  <div ref={UpAnimRef}></div>
+                  {upAnim != null &&
+                      <UpFadingAnimation isAnswerCorrect={upAnim} />
+                  }
+                  <div style={{ ...flagTableStyle}}>
+                    {countries.map((country, key) => (
+                      <CardFlag
+                        key={key}
+                        country={{
+                          ...country,
+                          className: '',
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <MaxScore text={`score: ${score}`} className="play-score" />
+                  {/* {isLose && <LoseModal score={score} callBack={restartGame} />} */}
+                </div>
           </div>
         </Container>
       </div>

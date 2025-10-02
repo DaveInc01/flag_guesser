@@ -14,6 +14,7 @@ export interface IUser {
         question: ICountry["name"],
         answer: ICountry["name"],
         allAnswers: allAnswers[], // [[question, answer]]
+        hearts: number,
         isLose: Boolean
     },
     userItems: {

@@ -2,6 +2,7 @@ import { IUser } from './IUser';
 import { AvatarGroups } from '../../constants/avatars';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ICountry } from '@/app/constants/countries';
+import { GameConfig } from '@/app/constants/game-config';
 
 const name = 'users';
 const avatarId = AvatarGroups['abc-warriors-characters'][0]._id;
@@ -15,6 +16,7 @@ const initialState:IUser = {
         question: '',
         answer: '',
         allAnswers: [], // [[question, answer]]
+        hearts: GameConfig.parameters.hearts,
         isLose: false,
     },
     userItems:{
@@ -59,10 +61,10 @@ export const userSlice = createSlice({
         setLose: (state, action:PayloadAction<boolean>)=>{
             state.inGame.isLose = action.payload
         },
+        setHearts: (state, action: PayloadAction<number>)=>{
+            state.inGame.hearts = action.payload 
+        },
         setAnswer: (state, action: PayloadAction<string>) => {
-            // console.log(state.inGame.question, 'question...');
-            // console.log(action.payload, 'answer...');
-            // console.log(`${state.inGame.question}: ${action.payload}`)
             state.inGame.allAnswers.push([state.inGame.question, action.payload]);
             state.userItems.maxScore = state.inGame.allAnswers.filter(([question, answer]) => {
                 return question === answer
@@ -86,6 +88,7 @@ export const userSlice = createSlice({
     toggleSounds,
     setAnswer,
     setLose,
+    setHearts,
     setQuestion,
     clearAllAnswers
 } = userSlice.actions;

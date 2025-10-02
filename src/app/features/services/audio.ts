@@ -1,7 +1,7 @@
 import { ISounds } from "@/app/constants/media";
 
 export const playSound = async (path:ISounds, isSoundOn:boolean) => {
-    var audio = (new Audio(path))
+    let audio = (new Audio(path))
     if (isSoundOn)
     {
         try {

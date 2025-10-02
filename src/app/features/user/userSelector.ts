@@ -1,4 +1,4 @@
-import { Countries } from "@/app/constants/countries";
+import { Countries, ICountry } from "@/app/constants/countries";
 import { RootState } from "@/app/store";
 import { createSelector } from '@reduxjs/toolkit';
 import { GameConfig } from "@/app/constants/game-config";
@@ -13,8 +13,7 @@ const selectorIsSoundsOn = (state:RootState) => state.user.settings.sounds;
 const selectorIsLose = (state:RootState) => state.user.inGame.isLose;
 const selectorQuestion = (state:RootState) => state.user.inGame.question;
 const selectorAllAnswers = (state: RootState) => state.user.inGame.allAnswers
-
-
+const selectorHearts = (state: RootState) => state.user.inGame.hearts
 // Find is the correct answer
 
 const selectorScore = createSelector(
@@ -45,7 +44,7 @@ const selectorIsCorrectAnswer = createSelector(
 
 const selectorFilteredCountries = createSelector(
     [selectorAllAnswers],
-    (allAnswers)=>{
+    (allAnswers) : ICountry[] =>{
         const questions = allAnswers.map(([question, answer]) => question);
         return Countries.filter(({ name }) => !questions.includes(name));
     }
@@ -68,6 +67,7 @@ export  {
     selectorIsSoundsOn,
     selectorIsLose,
     selectorQuestion,
+    selectorHearts,
     selectorIsCorrectAnswer,
     selectorScore,
     selectorAnswer,

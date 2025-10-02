@@ -7,28 +7,8 @@ import { ISounds } from '../../constants/media';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { playSound } from '@/app/features/services/audio';
 
-
-export const SettingsSlide = ()=>{
-    const dispatch = useAppDispatch()
-    const imgSoundOn = '/assets/images/icons/sound-on.png';
-    const imgSoundOff = '/assets/images/icons/sound-off.png';
-    const [slide, setSlide] = useState(false);
-    const [sound, setSound] = useState(imgSoundOn);
-
-    let sounds_settings = useAppSelector(selectorIsSoundsOn)
-    // dispatch(toggleSounds(false));
-    const soundToggle = () => {
-        if (sound === imgSoundOn) {
-            setSound(imgSoundOff);
-            dispatch(toggleSounds(false));
-        } else {
-            setSound(imgSoundOn);
-            playSound(ISounds.button, true).catch(()=> console.log("sound error"));
-            dispatch(toggleSounds(true));
-        }
-    };
-    const slideStyle: React.CSSProperties = {
-        display: "flex",
+const slideStyle: React.CSSProperties = {
+    display: "flex",
     backgroundColor: "rgb(247, 145, 30)",
     padding: "6px",
     boxShadow: "rgb(133, 56, 28) 1px 5px",
@@ -39,6 +19,24 @@ export const SettingsSlide = ()=>{
     marginTop: "20px"
 }
 
+export const SettingsSlide = ()=>{
+    const dispatch = useAppDispatch()
+    const sounds = useAppSelector(selectorIsSoundsOn)
+    const [slide, setSlide] = useState(false);
+
+    let isSoundsOn = useAppSelector(selectorIsSoundsOn)
+    let soundImage: string;
+    if (isSoundsOn)
+        soundImage = '/assets/images/icons/sound-on.png'
+    else
+        soundImage = '/assets/images/icons/sound-off.png'
+    // dispatch(toggleSounds(false));
+    const soundToggle = () => {
+        console.log("Toggle sound")
+        playSound(ISounds.button, !isSoundsOn).catch(()=> console.log("sound error"));
+        dispatch(toggleSounds(!isSoundsOn));
+    }
+  
     return (
         <div style={slideStyle}>
             <span className='span-elem' onClick={()=>setSlide(!slide)}>
@@ -46,7 +44,7 @@ export const SettingsSlide = ()=>{
             </span>
             {slide &&
             <span className='span-elem' onClick={soundToggle}>
-                <img src={sound} alt="" />
+                <img src={soundImage} alt="" />
             </span>
             }
         </div>
