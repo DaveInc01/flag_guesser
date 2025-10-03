@@ -44,13 +44,6 @@ export const CardFlag = ({
     }
   }
 
-  // useEffect(() => {
-  //   if (isCorrectAnswer && !flipped) {
-  //     setFlipped(true);
-  //     closeCard();
-  //   }
-  // }, [isCorrectAnswer, flipped]);
-
   return (
     <div
       className="main-card"

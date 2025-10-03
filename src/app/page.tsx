@@ -33,8 +33,6 @@ export default function Home () {
                     <HomeButton key={index} title={title} onClick={() => {
                         playSound(ISounds.button, sounds).then(() => {
                             if(path.includes(paths.Play)) {
-                                // dispatch(setIsCorrectAnswer(null))
-                                dispatch(decrementEnergy())
                                 Promise
                                 .resolve(new Promise((r) => setTimeout(() => r(null), 200)))
                                 .then(() => navigate(path))

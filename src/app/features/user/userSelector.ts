@@ -14,6 +14,7 @@ const selectorIsLose = (state:RootState) => state.user.inGame.isLose;
 const selectorQuestion = (state:RootState) => state.user.inGame.question;
 const selectorAllAnswers = (state: RootState) => state.user.inGame.allAnswers
 const selectorHearts = (state: RootState) => state.user.inGame.hearts
+const selectorTime = (state:RootState) => state.user.inGame.time
 // Find is the correct answer
 
 const selectorScore = createSelector(
@@ -72,6 +73,7 @@ export  {
     selectorScore,
     selectorAnswer,
     selectorAllAnswers,
+    selectorTime,
     selectorFilteredCountries,
     selectorAviableHearts
 }

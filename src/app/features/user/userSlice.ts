@@ -18,6 +18,7 @@ const initialState:IUser = {
         allAnswers: [], // [[question, answer]]
         hearts: GameConfig.parameters.hearts,
         isLose: false,
+        time: GameConfig.parameters.time
     },
     userItems:{
         coins: 50,
@@ -35,34 +36,40 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         createUser: (state, action) => {
-            state = action.payload;
+            state = action.payload
         },
         incrementMaxScore: (state, {payload}) => {
-            state.userItems.maxScore += payload;
+            state.userItems.maxScore += payload
         },
         decrementCoins: (state) => {
-            if(state.userItems.coins) state.userItems.coins--;
+            if(state.userItems.coins) state.userItems.coins--
         },
         incrementEnergy: (state, action) => {
-            state.userItems.energy += action.payload;
+            state.userItems.energy += action.payload
         },
         decrementEnergy: (state) => {
-            if(state.userItems.energy) state.userItems.energy--;
+            if(state.userItems.energy) state.userItems.energy--
         },
         incrementCoins: (state, action: PayloadAction<number>) =>{
-            state.userItems.coins += action.payload;
+            state.userItems.coins += action.payload
         },
         toggleSounds: (state, action: PayloadAction<boolean>) => {
             state.settings.sounds = action.payload
         },
         setQuestion: (state, action: PayloadAction<string>) => {
-            state.inGame.question = action.payload;
+            state.inGame.question = action.payload
         },
         setLose: (state, action:PayloadAction<boolean>)=>{
             state.inGame.isLose = action.payload
         },
         setHearts: (state, action: PayloadAction<number>)=>{
             state.inGame.hearts = action.payload 
+        },
+        setTime: (state, action:PayloadAction<number>)=>{
+            state.inGame.time = action.payload
+        },
+        decrementTime: (state)=>{
+            if (state.inGame.time) state.inGame.time--
         },
         setAnswer: (state, action: PayloadAction<string>) => {
             state.inGame.allAnswers.push([state.inGame.question, action.payload]);
@@ -88,6 +95,8 @@ export const userSlice = createSlice({
     toggleSounds,
     setAnswer,
     setLose,
+    setTime,
+    decrementTime,
     setHearts,
     setQuestion,
     clearAllAnswers

@@ -16,6 +16,7 @@ export interface IUser {
         allAnswers: allAnswers[], // [[question, answer]]
         hearts: number,
         isLose: Boolean
+        time: number
     },
     userItems: {
         coins: number,

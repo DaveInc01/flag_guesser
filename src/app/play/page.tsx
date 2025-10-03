@@ -1,11 +1,7 @@
 "use client";
 
-import { random, shuffle } from "lodash";
-
 import "../style/PlayContent.css";
-import { ICardFlag } from "@/app/components/ui-elements/CardFlag";
 import { Container } from "@/app/components/layouts/Container";
-//
 
 "use";
 import { Countries, ICountry } from "../constants/countries";
@@ -13,16 +9,14 @@ import { CardFlag } from "../components/ui-elements/CardFlag";
 import { MaxScore } from "../components/ui-elements/MaxScore";
 import { use, useEffect, useMemo, useRef, useState, CSSProperties } from "react";
 import UpFadingAnimation from "../components/animations/UpFadingAnimation";
-import { selectorAllAnswers, selectorAnswer, selectorFilteredCountries, selectorIsCorrectAnswer, selectorQuestion, selectorScore, selectorIsLose } from "../features/user/userSelector";
+import { selectorFilteredCountries, selectorIsCorrectAnswer, selectorQuestion, selectorScore, selectorAviableHearts, selectorTime } from "../features/user/userSelector";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { getRandomCountries } from "@/app/play/utils";
-import { clearAllAnswers, decrementEnergy, setHearts, setLose, setQuestion } from "@/app/features/user/userSlice";
-import { count } from "console";
+import { clearAllAnswers, decrementEnergy, decrementTime, setAnswer, setHearts, setLose, setQuestion, setTime } from "@/app/features/user/userSlice";
 import { PlayHeader } from "../components/ui-elements/PlayHeader";
 import { LoseModal } from "../components/modals/Lose";
 import { GameConfig } from "@/app/constants/game-config";
 
-///
 
 const flagTableStyle: React.CSSProperties = {
   display: "grid",
@@ -42,7 +36,6 @@ type IItemFlag = ICountry & { className: string };
 export type IPlayContent = {
   countries: IItemFlag[];
 };
-////
 
 
 const headerStyle: CSSProperties = {
@@ -60,84 +53,90 @@ const noneDesk: CSSProperties = {
   boxShadow: "#1e384a 0px 0px!important",
 };
 
-// function removeSolves(
-//   countries: ICardFlag["country"][],
-//   solvedCountryNames: ICountry["name"][]
-// ): ICardFlag["country"][] {
-//   return countries.filter(({ name }) => !solvedCountryNames.includes(name));
-// }
-
-// function makeFourCountries(
-//   countries: ICardFlag["country"][],
-//   solvedCountryNames: ICountry["name"][]
-// ): ICardFlag["country"][] {
-//   let filtred = shuffle(removeSolves(countries, solvedCountryNames));
-//   let rand: number = random(0, filtred.length - 5);
-
-//   return filtred.slice(rand, rand + 4);
-// }
-
-// function makeRightCountryName(_countries: ICountry[]): ICountry["name"] {
-//   return _countries[random(0, _countries.length - 1)]?.name || "";
-// }
-  
-// function getCountriesWithEmptyClassess(
-//   countries: ICountry[]
-// ): ICardFlag["country"][] {
-//   return countries.map((c) => ({ ...c, className: "" }));
-// }
-
-
-
 export default function PlayPage() {
-  let timeoutTime: NodeJS.Timeout;
   const dispatch = useAppDispatch();
-
-  //
-  const [time, setTime] = useState<number>(GameConfig.parameters.time)
+  let timerIntervalId = useRef<number | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
-  const [upAnim, setUpAnim] = useState<boolean | null>(null);
   const UpAnimRef = useRef<HTMLDivElement | null>(null);
+  const [countries, setCountries] = useState<ICountry[]>([]);
+  const [upAnim, setUpAnim] = useState<boolean | null>(null);
   const isCorretAnswer = useAppSelector(selectorIsCorrectAnswer);
   const score = useAppSelector(selectorScore);
+  let time = useAppSelector(selectorTime)
   const question: ICountry["name"] | null = useAppSelector(selectorQuestion);
   const filteredCountries = useAppSelector(selectorFilteredCountries);
-  const answers = useAppSelector(state => state.user.inGame.allAnswers);
-  const [countries, setCountries] = useState<ICountry[]>([]);
-  const isLose = useAppSelector(selectorIsLose)
-  // const [nextQuestion, setNexquestion] = useState<Boolean | null>(null)
-
+  const aviableHearts = useAppSelector(selectorAviableHearts)
+  let componentMountedFlag = useRef<boolean>(false)
+  
   const restartGame = () => {
-    dispatch(clearAllAnswers())
-    dispatch(setLose(false))
-    changeQuestion()
-    dispatch(decrementEnergy());
-    dispatch(setHearts(GameConfig.parameters.hearts))
-    setTime(GameConfig.parameters.time);
-    // Promise.resolve(new Promise((r) => setTimeout(() => r(null), 600)));
+    if(!componentMountedFlag.current){
+      console.log("Decrement Energy")
+      dispatch(clearAllAnswers())
+      dispatch(setLose(false))
+      changeQuestion()
+      dispatch(decrementEnergy());
+      dispatch(setHearts(GameConfig.parameters.hearts))
+      dispatch(setTime(GameConfig.parameters.time))
+      componentMountedFlag.current = true
+    }
   };
+
+  const createTimerInterval= () =>{
+    if(timerIntervalId.current) 
+      return
+    timerIntervalId.current = window.setInterval(()=>{
+        console.log("Thick")
+        dispatch(decrementTime())
+      }, 1000)
+  }
+
+  const stopTimerInterval = () =>{
+    if(timerIntervalId.current){
+      clearInterval(timerIntervalId.current)
+      timerIntervalId.current = null
+    }
+  }
+
+  useEffect(()=>{
+    // for restart game work
+    if(!aviableHearts)
+    {  
+      stopTimerInterval()
+      componentMountedFlag.current = false
+    }
+  }, [aviableHearts])
 
   const changeQuestion = () =>{
       const randomCountries = getRandomCountries(filteredCountries);
       const [question] = getRandomCountries(randomCountries, 1);
       setCountries(randomCountries);
       dispatch(setQuestion(question.name));
+      dispatch(setTime(GameConfig.parameters.time))
+      stopTimerInterval()
+      createTimerInterval()
   }
-  // When component is mounted set question and flags
+
   useEffect(() => {
     restartGame()
   }, []);
 
+  useEffect(() => {
+    if(!time){
+      //set wrong anser
+      dispatch(setAnswer(''))
+    }
+  }, [time]); 
 
   useEffect(() => {
-	console.log("Is correct ans - ", isCorretAnswer)
     setUpAnim(isCorretAnswer);
-	if (isCorretAnswer != null){
-		setTimeout(()=>{
-		  changeQuestion()
-		  console.log("Correct answer changed")
-		}, 2000)
-	}
+    // isCorretAnswer == null when hasn't choose any variant
+    if ((isCorretAnswer != null) && aviableHearts){
+      stopTimerInterval()
+      setTimeout(()=>{
+        console.log("Aviable hearts - ", aviableHearts)
+        changeQuestion()
+      }, 2000)
+    }
   }, [isCorretAnswer]);
 
   return (
@@ -146,7 +145,7 @@ export default function PlayPage() {
         <Container className="play-container">
           <div className="inner-play-container">
             <div className="play-content">
-                <PlayHeader/>
+                <PlayHeader stopTimerInterval={stopTimerInterval}/>
                   <hr style={{ margin: "20px 0px" }} />
                   <h2 style={titleStyle} ref={titleRef}>
                     {question}
@@ -167,7 +166,10 @@ export default function PlayPage() {
                     ))}
                   </div>
                   <MaxScore text={`score: ${score}`} className="play-score" />
-                  {/* {isLose && <LoseModal score={score} callBack={restartGame} />} */}
+                  {
+                    !aviableHearts && 
+                    <LoseModal score={score} callBack={restartGame} />
+                  }
                 </div>
           </div>
         </Container>
@@ -175,9 +177,4 @@ export default function PlayPage() {
     // </AuthGuard>
   );
 }
-
-
-// function dispatch(arg0: { payload: undefined; type: "users/decrementEnergy"; }) {
-//   throw new Error("Function not implemented.");
-// }
 

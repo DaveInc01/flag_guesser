@@ -18,10 +18,16 @@
     font-family: DelaGothicOne
 }
 
-/* styles.module.css */
-:global(input:-webkit-autofill),
-:global(textarea:-webkit-autofill),
-:global(select:-webkit-autofill) {
+/* .textInput :global(input:-webkit-autofill),
+.textInput :global(textarea:-webkit-autofill),
+.textInput :global(select:-webkit-autofill) {
   -webkit-text-fill-color: #ffffff !important;
   box-shadow: 0 0 0 1000px #f7911e inset !important;
+} */
+
+:global(input:-webkit-autofill), 
+:global(textarea:-webkit-autofill), 
+:global(select:-webkit-autofill) { 
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow: 0 0 0 1000px #f7911e inset !important; 
 }
